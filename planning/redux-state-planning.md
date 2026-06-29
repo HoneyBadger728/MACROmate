@@ -162,6 +162,28 @@ Approved
 
 ## Technical Decisions
 
+### UI State Management
+
+Decision:
+- UI-specific state will remain local to React components for MACROmate MVP.
+- Redux will be reserved for shared application state.
+
+Reasoning:
+- Most UI state is only needed by a single component. 
+- Local useState reduces unnecessary complexity in MVP.
+- Shared application data benefits from centralized Redux management. 
+
+Future Considerations:
+- A uiSlice may be introduced if multiple unrelated components need to share UI state, for example:
+    - Global notifications
+    - Active filters
+    - Search terms
+
+Status:
+Approved
+
+---
+
 ## Proposed State Structure
 ```js
 {
@@ -206,7 +228,7 @@ Responsibilities:
 - update protein goal
 - update carb goal
 - update fat goal
-- reset goal progress (and meals) to default
+- reset goal progress to default
 
 ---
 
@@ -222,7 +244,7 @@ Responsibilities:
 - block deletion if item is used in meal entries
 
 Consideration:
-If the user can specify quantities within the pantry, then it will be easier for them to determine the macros (to be added by the item/quantity, since quantities auto-update macros) before they add the food to the entries section.  
+User specified quantities, within the pantry, remain local UI state. Changing preview quantities should not alter stored meals, unless pantry item nutritional data is being changed. 
 
 ---
 
@@ -232,11 +254,10 @@ Stores:
 - mealEntries
 
 Responsibilities:
-- add meal entry (if we add meals directly from pantry, then not necessary here?)
+- add meal entry 
 - edit meal entry quantity
 - remove meal entry
-- clear all meal entries (not sure this is needed if reset clears all and sets to default)
+- clear all meal entries 
 
 ---
 
-### uiSlice ????
