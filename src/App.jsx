@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import GoalsForm from './features/goals/GoalsForm.jsx'
-
 import './App.css'
 
 function App() {
