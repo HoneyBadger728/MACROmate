@@ -152,6 +152,23 @@ Approved
 
 ---
 
+### Primary Navigation
+
+Decision:
+- The MACROmate app logo serves as the application navigation to the landing page.
+- The landing page is the Goals page.
+- Navigation places Pantry on the left and Entries on the right of the MACROmate logo.  
+
+Reasoning:
+- Reflects workflow usage from left to right. 
+- Reinforces MACROmate branding by making the logo centralized and a primary means of navigation.
+- Aligns with common industry practice of making the app logo a navigation link to the landing page.  
+
+Status:
+Approved
+
+---
+
 ## Open Questions
 
 ### Editing Meal Entries

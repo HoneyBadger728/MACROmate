@@ -19,5 +19,4 @@ App
 |   |- MealEntriesList
 |   |- MealEntryCard
 |   |- MacroProgressFooter
-|
-|-- StatusFooter(?)
+
