@@ -1,22 +1,22 @@
 # Component Architecture
 
 App
-
+|
 |-- Header
+|   | - Navigation
 |
-|-- Navigation
-|
-|-- GoalsPage
-|   |- GoalsForm
-|   |- GoalsSummary
-|
-|-- PantryPage
-|   |- PantryList
-|   |- PantryItemCard
-|   |- MacroProgressFooter
-|
-|-- MealEntriesPage
-|   |- MealEntriesList
-|   |- MealEntryCard
-|   |- MacroProgressFooter
+|-- Routes
+    |-- GoalsPage
+    |   |- GoalsForm
+    |   |- GoalsSummary
+    |
+    |-- PantryPage
+    |   |- PantryList
+    |   |- PantryItemCard
+    |   |- MacroProgressFooter
+    |
+    |-- MealEntriesPage
+    |   |- MealEntriesList
+    |   |- MealEntryCard
+    |   |- MacroProgressFooter
 
