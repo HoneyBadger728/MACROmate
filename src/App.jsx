@@ -1,11 +1,21 @@
-
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import GoalsPage from './pages/GoalsPage';
+import PantryPage from './pages/PantryPage';
+import MealEntriesPage from './pages/MealEntriesPage';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1>MACROmate</h1>
-    </div>
+    <>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<GoalsPage />} />
+        <Route path="/pantry" element={<PantryPage />} />
+        <Route path="/" element={<MealEntriesPage />} />
+      </Routes>
+    </>
   );
 }
 
