@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = [
+    {
+        id: "food-1",
+        name: "Chicken Breast",
+        caloriesPer100g: 165,
+        proteinPer100g: 31,
+        carbsPer100g: 0,
+        fatPer100g: 3.6,
+    },
+];
 
 const pantrySlice = createSlice({
     name: "pantry",

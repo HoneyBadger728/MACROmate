@@ -11,8 +11,11 @@ App
     |   |- GoalsSummary
     |
     |-- PantryPage
+    |   |- AddFoodButton
+    |   |- AddFoodModal
     |   |- PantryList
-    |   |- PantryItemCard
+    |   |   |- PantryItemCard
+        |       |- DeleteConfirmationModal
     |   |- MacroProgressFooter
     |
     |-- MealEntriesPage
