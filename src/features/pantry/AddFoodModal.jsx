@@ -1,6 +1,20 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPantryItem } from "./pantrySlice";
+
+function createPantryItem(formData) {
+    return {
+            id: crypto.randomUUID(),
+            name: formData.name.trim(),
+            caloriesPer100g: Number(formData.caloriesPer100g),
+            proteinPer100g: Number(formData.proteinPer100g),
+            carbsPer100g: Number(formData.carbsPer100g),
+            fatPer100g: Number(formData.fatPer100g),
+        };
+}
 
 function AddFoodModal({ onClose }) {
+    const dispatch = useDispatch();
     const [newFood, setNewFood] = useState({
         name: "",
         caloriesPer100g: "",
@@ -21,7 +35,10 @@ function AddFoodModal({ onClose }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        console.log(newFood)
+        const pantryItem = createPantryItem(newFood)
+
+        dispatch(addPantryItem(pantryItem));
+        onClose();
     };
     
     
