@@ -35,6 +35,11 @@ function AddFoodModal({ onClose }) {
     function handleSubmit(event) {
         event.preventDefault();
 
+     if (!newFood.name.trim()) {
+        alert("Please enter a valid food name.");
+        return;
+     }
+
         const pantryItem = createPantryItem(newFood)
 
         dispatch(addPantryItem(pantryItem));
@@ -52,6 +57,7 @@ function AddFoodModal({ onClose }) {
                     <input 
                     type="text"
                     name="name"
+                    required
                     value={newFood.name}
                     onChange={handleChange} 
                     />
@@ -62,6 +68,9 @@ function AddFoodModal({ onClose }) {
                     <input 
                     type="number"
                     name="caloriesPer100g"
+                    required
+                    min="0"
+                    step="any"
                     value={newFood.caloriesPer100g}
                     onChange={handleChange} 
                     />
@@ -72,6 +81,9 @@ function AddFoodModal({ onClose }) {
                     <input 
                     type="number"
                     name="proteinPer100g"
+                    required
+                    min="0"
+                    step="any"
                     value={newFood.proteinPer100g}
                     onChange={handleChange} 
                     />
@@ -82,6 +94,9 @@ function AddFoodModal({ onClose }) {
                     <input 
                     type="number"
                     name="carbsPer100g"
+                    required
+                    min="0"
+                    step="any"
                     value={newFood.carbsPer100g}
                     onChange={handleChange} 
                     />
@@ -92,6 +107,9 @@ function AddFoodModal({ onClose }) {
                     <input 
                     type="number"
                     name="fatPer100g"
+                    required
+                    min="0"
+                    step="any"
                     value={newFood.fatPer100g}
                     onChange={handleChange} 
                     />
