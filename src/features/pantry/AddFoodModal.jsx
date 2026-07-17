@@ -30,7 +30,7 @@ function AddFoodModal({ onClose }) {
             ...newFood,
             [name]: value,
         });
-    };
+    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -44,84 +44,90 @@ function AddFoodModal({ onClose }) {
 
         dispatch(addPantryItem(pantryItem));
         onClose();
-    };
+    }
     
     
     return (
-        <section>
-            <h3>Add Pantry Item</h3>
+        <div className="modal-backdrop">
+            <section
+                className="modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="add-pantry-item-title"
+            >
+                <h2 id="add-pantry-item-title">Add Pantry Item</h2>
 
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Food Name:
-                    <input 
-                    type="text"
-                    name="name"
-                    required
-                    value={newFood.name}
-                    onChange={handleChange} 
-                    />
-                </label>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Food Name:
+                        <input 
+                        type="text"
+                        name="name"
+                        required
+                        value={newFood.name}
+                        onChange={handleChange} 
+                        />
+                    </label>
 
-                <label>
-                    Calories Per 100g:
-                    <input 
-                    type="number"
-                    name="caloriesPer100g"
-                    required
-                    min="0"
-                    step="any"
-                    value={newFood.caloriesPer100g}
-                    onChange={handleChange} 
-                    />
-                </label>
+                    <label>
+                        Calories Per 100g:
+                        <input 
+                        type="number"
+                        name="caloriesPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={newFood.caloriesPer100g}
+                        onChange={handleChange} 
+                        />
+                    </label>
 
-                <label>
-                    Protein Per 100g:
-                    <input 
-                    type="number"
-                    name="proteinPer100g"
-                    required
-                    min="0"
-                    step="any"
-                    value={newFood.proteinPer100g}
-                    onChange={handleChange} 
-                    />
-                </label>
+                    <label>
+                        Protein Per 100g:
+                        <input 
+                        type="number"
+                        name="proteinPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={newFood.proteinPer100g}
+                        onChange={handleChange} 
+                        />
+                    </label>
 
-                <label>
-                    Carbs Per 100g:
-                    <input 
-                    type="number"
-                    name="carbsPer100g"
-                    required
-                    min="0"
-                    step="any"
-                    value={newFood.carbsPer100g}
-                    onChange={handleChange} 
-                    />
-                </label>
+                    <label>
+                        Carbs Per 100g:
+                        <input 
+                        type="number"
+                        name="carbsPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={newFood.carbsPer100g}
+                        onChange={handleChange} 
+                        />
+                    </label>
 
-                <label>
-                    Fat Per 100g
-                    <input 
-                    type="number"
-                    name="fatPer100g"
-                    required
-                    min="0"
-                    step="any"
-                    value={newFood.fatPer100g}
-                    onChange={handleChange} 
-                    />
-                </label>
+                    <label>
+                        Fat Per 100g:
+                        <input 
+                        type="number"
+                        name="fatPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={newFood.fatPer100g}
+                        onChange={handleChange} 
+                        />
+                    </label>
+                    <div className="modal-actions">
+                        <button type="submit">Save Food</button>
 
-                <button type="submit">Save Food</button>
-
-                <button type="button" onClick={onClose}> 
-                Cancel    
-                </button>
-            </form>
-        </section>
+                        <button type="button" onClick={onClose}>Cancel</button>
+                    </div>
+                </form>
+            </section>
+        </div>
     )
 }
 
