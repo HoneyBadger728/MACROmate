@@ -15,6 +15,8 @@ function createPantryItem(formData) {
 
 function AddFoodModal({ onClose }) {
     const dispatch = useDispatch();
+
+    const [formError, setFormError] = useState("");
     const [newFood, setNewFood] = useState({
         name: "",
         caloriesPer100g: "",
@@ -22,6 +24,7 @@ function AddFoodModal({ onClose }) {
         carbsPer100g: "",
         fatPer100g: "",
     });
+    
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -30,20 +33,26 @@ function AddFoodModal({ onClose }) {
             ...newFood,
             [name]: value,
         });
+
+        if (formError) {
+            setFormError("");
+        }
     }
 
     function handleSubmit(event) {
         event.preventDefault();
 
-     if (!newFood.name.trim()) {
-        alert("Please enter a valid food name.");
-        return;
-     }
+        if (!newFood.name.trim()) {
+            setFormError("Please enter a valid food name.");
+            return;
+        }
+
+        setFormError("");
 
         const pantryItem = createPantryItem(newFood)
 
-        dispatch(addPantryItem(pantryItem));
-        onClose();
+            dispatch(addPantryItem(pantryItem));
+            onClose();
     }
     
     
@@ -65,9 +74,18 @@ function AddFoodModal({ onClose }) {
                         name="name"
                         required
                         value={newFood.name}
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        aria-describedby={
+                            formError ? "add-food-error" : undefined
+                        } 
                         />
                     </label>
+
+                    {formError && (
+                        <p id="add-food-error" role="alert">
+                            {formError}    
+                        </p>
+                    )}
 
                     <label>
                         Calories Per 100g:

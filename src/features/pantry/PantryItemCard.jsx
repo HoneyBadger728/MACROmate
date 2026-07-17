@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editPantryItem } from "./pantrySlice";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
     const dispatch = useDispatch();
+    const formErrorId = `edit-food-error-${item.id}`;
 
     const [quantityGrams, setQuantityGrams] = useState(100);
     const [isEditing, setIsEditing] = useState(false);
+    const [formError, setFormError] = useState("");
     const [editFood, setEditFood] = useState({
         name: item.name,
         caloriesPer100g: item.caloriesPer100g,
@@ -15,6 +17,13 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         carbsPer100g: item.carbsPer100g,
         fatPer100g: item.fatPer100g,
     });
+
+    useEffect(() => {
+        if (!isExpanded) {
+            setIsEditing(false);
+            setFormError("");
+        }
+    }, [isExpanded]);
 
     const quantityMultiplier = quantityGrams / 100;
     
@@ -34,6 +43,8 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleStartEditing() {
+        setFormError("");
+
         setEditFood({
             name: item.name,
             caloriesPer100g: item.caloriesPer100g,
@@ -53,13 +64,25 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
             ...editFood,
             [name]: value,
         });
+
+        if (formError) {
+            setFormError("");
+        }
     }
 
-    function handleSaveEditing() {
-        if (!editFood.name.trim()) {
-            alert("Please enter a valid food name.");
+    function handleSaveEditing(event) {
+        event.preventDefault();
+
+          if (!isEditing) {
             return;
         }
+
+        if (!editFood.name.trim()) {
+            setFormError("Please enter a valid food name.");
+            return;
+        }
+
+        setFormError("");
 
         dispatch(
             editPantryItem({
@@ -76,137 +99,152 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleToggleCard() {
-        if (isExpanded && isEditing) {
-            setIsEditing(false);
-        }
-
         onToggle();
     }
 
     return (
         <article>
-            {isEditing ? (
-                <input 
-                    type="text"
-                    name="name"
-                    value={editFood.name}
-                    onChange={handleEditChange}
-                />
-            ) : (
-                <h3>{item.name}</h3>
-            )}
-
-            <button
-                type="button"
-                onClick={handleToggleCard}
-                aria-expanded={isExpanded}
-                aria-label={isExpanded ? `Collapse ${item.name}` : `Expand ${item.name}`}
-            >
-                <span aria-hidden="true">
-                    {isExpanded ? "▲" : "▼"}
-                </span>
-            </button>
-            
-            <label>
-                Quantity:
-                <input 
-                    type="number"
-                    min="0"
-                    step="any"
-                    value={quantityGrams}
-                    disabled={isEditing}
-                    onChange={handleQuantityChange}
-                    onFocus={handleQuantityFocus} 
-                />
-                g
-            </label>
-
-            <label>
-                Calories:
-                <input 
-                    type="number"
-                    name="caloriesPer100g"
-                    min="0"
-                    step="any"
-                    value={
-                        isEditing ? editFood.caloriesPer100g : displayedCalories
-                    }
-                    disabled={!isEditing}
-                    onChange={handleEditChange} 
-                /> 
-            </label>
-
-            <label>
-                Protein:
-                <input 
-                    type="number"
-                    name="proteinPer100g"
-                    min="0"
-                    step="any"
-                    value={
-                        isEditing ? editFood.proteinPer100g : displayedProtein
-                    }
-                    disabled={!isEditing}
-                    onChange={handleEditChange} 
-                /> 
-            </label>
-
-            <label>
-                Carbs:
-                <input 
-                    type="number"
-                    name="carbsPer100g"
-                    min="0"
-                    step="any"
-                    value={
-                        isEditing ? editFood.carbsPer100g : displayedCarbs
-                    }
-                    disabled={!isEditing}
-                    onChange={handleEditChange} 
-                /> 
-            </label>
-
-            <label>
-                Fat:
-                <input 
-                    type="number"
-                    name="fatPer100g"
-                    min="0"
-                    step="any"
-                    value={
-                        isEditing ? editFood.fatPer100g : displayedFat
-                    }
-                    disabled={!isEditing}
-                    onChange={handleEditChange} 
-                /> 
-            </label>
-          
-           
-
-            {isExpanded && (
-
-                isEditing ? (
-                    <button type="button" onClick={handleSaveEditing}>
-                    Save Changes
-                    </button>
+            <form onSubmit={handleSaveEditing}>
+                {isEditing ? (
+                    <label>
+                        Food Name:
+                        <input 
+                            type="text"
+                            name="name"
+                            required
+                            value={editFood.name}
+                            onChange={handleEditChange}
+                            aria-describedby={
+                                formError ? formErrorId : undefined
+                            }
+                        />
+                    </label>
                 ) : (
-                <div>
-                    <button type="button">
-                        Add to Today's Meals
-                    </button>
+                    <h3>{item.name}</h3>
+                )}
 
-                    <button type="button" onClick={handleStartEditing}>
-                        Edit Food
-                    </button>
+                {formError && (
+                    <p id={formErrorId} role="alert">
+                        {formError}
+                    </p>
+                )}
 
-                    <button type="button">
-                        Delete Food
-                    </button>
-                </div>
-                ) 
-            )}
+                <button
+                    type="button"
+                    onClick={handleToggleCard}
+                    aria-expanded={isExpanded}
+                    aria-label={isExpanded ? `Collapse ${item.name}` : `Expand ${item.name}`}
+                >
+                    <span aria-hidden="true">
+                        {isExpanded ? "▲" : "▼"}
+                    </span>
+                </button>
+                
+                
+                <label>
+                    Quantity:
+                    <input 
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={quantityGrams}
+                        disabled={isEditing}
+                        onChange={handleQuantityChange}
+                        onFocus={handleQuantityFocus} 
+                    />
+                    g
+                </label>
 
-               
+                <label>
+                    Calories:
+                    <input 
+                        type="number"
+                        name="caloriesPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={
+                            isEditing ? editFood.caloriesPer100g : displayedCalories
+                        }
+                        disabled={!isEditing}
+                        onChange={handleEditChange} 
+                    /> 
+                </label>
+
+                <label>
+                    Protein:
+                    <input 
+                        type="number"
+                        name="proteinPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={
+                            isEditing ? editFood.proteinPer100g : displayedProtein
+                        }
+                        disabled={!isEditing}
+                        onChange={handleEditChange} 
+                    /> 
+                </label>
+
+                <label>
+                    Carbs:
+                    <input 
+                        type="number"
+                        name="carbsPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={
+                            isEditing ? editFood.carbsPer100g : displayedCarbs
+                        }
+                        disabled={!isEditing}
+                        onChange={handleEditChange} 
+                    /> 
+                </label>
+
+                <label>
+                    Fat:
+                    <input 
+                        type="number"
+                        name="fatPer100g"
+                        required
+                        min="0"
+                        step="any"
+                        value={
+                            isEditing ? editFood.fatPer100g : displayedFat
+                        }
+                        disabled={!isEditing}
+                        onChange={handleEditChange} 
+                    /> 
+                </label>
+            
+            
+
+                {isExpanded && (
+
+                    isEditing ? (
+                        <button type="submit">
+                        Save Changes
+                        </button>
+                    ) : (
+                    <div>
+                        <button type="button">
+                            Add to Today's Meals
+                        </button>
+
+                        <button type="button" onClick={handleStartEditing}>
+                            Edit Food
+                        </button>
+
+                        <button type="button">
+                            Delete Food
+                        </button>
+                    </div>
+                    ) 
+                )}
+
+            </form>       
         </article>
     );
 }
