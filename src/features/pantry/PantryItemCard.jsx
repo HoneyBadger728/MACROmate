@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editPantryItem, deletePantryItem } from "./pantrySlice";
 import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
+import { addMealEntry } from "../meals/mealEntriesSlice";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
@@ -107,6 +108,18 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     function handleDelete() {
         dispatch(deletePantryItem(item.id))
         setIsDeleteOpen(false);
+    }
+
+    function handleAddToMeals() {
+        const mealEntry = {
+            id: crypto.randomUUID(),
+            foodId: item.id,
+            quantityGrams: quantityGrams,
+        };
+
+        dispatch(addMealEntry(mealEntry));
+
+        console.log("Meal entry dispatched:", mealEntry); 
     }
 
     return (
@@ -236,7 +249,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                         </button>
                     ) : (
                     <div>
-                        <button type="button">
+                        <button type="button" onClick={handleAddToMeals}>
                             Add to Today's Meals
                         </button>
 
