@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editPantryItem } from "./pantrySlice";
+import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
@@ -10,6 +11,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     const [quantityGrams, setQuantityGrams] = useState(100);
     const [isEditing, setIsEditing] = useState(false);
     const [formError, setFormError] = useState("");
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const [editFood, setEditFood] = useState({
         name: item.name,
         caloriesPer100g: item.caloriesPer100g,
@@ -100,6 +102,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
     function handleToggleCard() {
         onToggle();
+    }
+
+    function handleDelete() {
+        console.log(`Delete ${item.name}`);
+        setIsDeleteOpen(false);
     }
 
     return (
@@ -237,14 +244,20 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                             Edit Food
                         </button>
 
-                        <button type="button">
+                        <button type="button" onClick={() => setIsDeleteOpen(true)}>
                             Delete Food
                         </button>
                     </div>
                     ) 
                 )}
-
-            </form>       
+            </form>
+            {isDeleteOpen && (
+                <DeleteConfirmationModal
+                    itemName={item.name}
+                    onClose={() => setIsDeleteOpen(false)}
+                    onConfirm={handleDelete}
+                />
+            )}       
         </article>
     );
 }
