@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { editPantryItem } from "./pantrySlice";
+import { editPantryItem, deletePantryItem } from "./pantrySlice";
 import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
@@ -105,7 +105,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleDelete() {
-        console.log(`Delete ${item.name}`);
+        dispatch(deletePantryItem(item.id))
         setIsDeleteOpen(false);
     }
 
