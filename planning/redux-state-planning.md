@@ -160,6 +160,19 @@ Approved
 
 ---
 
+### Pantry Item Editing
+
+Decision:
+- Pantry items that exist in Today's Meals requires user acknowledgement before saving changes.
+
+Reasoning:
+- To support above decision that meals reference current pantry items.
+
+Status:
+Approved
+
+---
+
 ## Technical Decisions
 
 ### UI State Management
