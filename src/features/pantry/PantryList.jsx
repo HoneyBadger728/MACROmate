@@ -12,14 +12,18 @@ function PantryList() {
 
     return (
         <section>
-            {pantryItems.map((item) => (
-                <PantryItemCard 
-                    key={item.id} 
-                    item={item}
-                    isExpanded={expandedItemId === item.id}
-                    onToggle={() => handleToggle(item.id)} 
-                />
-            ))}
+            {pantryItems.length === 0 ? (
+                <p>Your pantry is currently empty. Add a food to get started.</p>
+            ) : (
+                pantryItems.map((item) => (
+                    <PantryItemCard 
+                        key={item.id} 
+                        item={item}
+                        isExpanded={expandedItemId === item.id}
+                        onToggle={() => handleToggle(item.id)} 
+                    />
+                ))
+            )}
         </section>
     ); 
 }
