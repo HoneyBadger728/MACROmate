@@ -1,8 +1,14 @@
 import { useSelector } from "react-redux";
+import MealEntryCard from "./MealEntryCard";
 
 function MealEntriesList() {
     const mealEntries = useSelector((state) => state.mealEntries);
     const pantryItems = useSelector((state) => state.pantry);
+
+    
+    function handleDeleteMealEntry(entryId) {
+        dispatch(deleteMealEntry(entryId))
+    }
 
     if (mealEntries.length === 0) {
         return <p>No foods added to Today's Meals yet.</p>;
@@ -19,22 +25,12 @@ function MealEntriesList() {
                     return null
                 }
 
-                const quantityMultiplier = entry.quantityGrams / 100;
-                const calories = food.caloriesPer100g * quantityMultiplier;
-                const protein = food.proteinPer100g * quantityMultiplier;
-                const carbs = food.carbsPer100g * quantityMultiplier;
-                const fat = food.fatPer100g * quantityMultiplier;
-
                 return (
-                    <article key={entry.id}>
-                        <h3>{food.name}</h3>
-
-                        <p>Quantity: {entry.quantityGrams}g</p>
-                        <p>Calories: {calories}</p>
-                        <p>Protein: {protein}</p>
-                        <p>Carbs: {carbs}</p>
-                        <p>Fat: {fat}</p>
-                    </article>
+                    <MealEntryCard 
+                        key={entry.id}
+                        entry={entry}
+                        food={food}
+                    />
                 );
             })}
         </section>
