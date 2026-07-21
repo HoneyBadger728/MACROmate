@@ -1,5 +1,5 @@
 import MealEntriesList from "../features/meals/MealEntriesList";
-import MacroProgressFooter from "../features/meals/MacroProgressFooter";
+import MacroProgressFooter from "../components/MacroProgressFooter";
 
 function MealEntriesPage() {
     return (

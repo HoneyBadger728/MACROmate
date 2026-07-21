@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectMealTotals } from "./mealSelectors";
+import { selectMealTotals } from "../features/meals/mealSelectors";
 
 function MacroProgressFooter() {
     const totals = useSelector(selectMealTotals);
