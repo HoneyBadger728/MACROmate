@@ -28,7 +28,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         }
     }, [isExpanded]);
 
-    const quantityMultiplier = quantityGrams / 100;
+    const quantityMultiplier = (Number(quantityGrams) || 0) / 100;
     
     const displayedCalories = item.caloriesPer100g * quantityMultiplier;
     const displayedProtein = item.proteinPer100g * quantityMultiplier;
@@ -36,7 +36,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     const displayedFat = item.fatPer100g * quantityMultiplier;
 
     function handleQuantityChange(event) {
-        setQuantityGrams(Number(event.target.value));
+        const value = event.target.value;
+
+        setQuantityGrams(
+            value === "" ? "" : Number(value)
+        );
     }
 
     function handleQuantityFocus() {
@@ -111,6 +115,10 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleAddToMeals() {
+        if (quantityGrams === "" || quantityGrams <= 0) {
+            return;
+        }
+        
         const mealEntry = {
             id: crypto.randomUUID(),
             foodId: item.id,
@@ -119,7 +127,6 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
         dispatch(addMealEntry(mealEntry));
 
-        console.log("Meal entry dispatched:", mealEntry); 
     }
 
     return (

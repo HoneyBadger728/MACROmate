@@ -8,6 +8,6 @@ export const store = configureStore({
   reducer: {
     goals: goalsReducer,
     pantry: pantryReducer,
-    meals: mealEntriesReducer,
+    mealEntries: mealEntriesReducer,
   },
 });
