@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
-import { selectMealTotals } from "../features/meals/mealSelectors";
+import { selectMealTotals, selectRemainingMacros } from "../features/meals/mealSelectors";
 
 function MacroProgressFooter() {
     const totals = useSelector(selectMealTotals);
+    const remaining = useSelector(selectRemainingMacros);
+
+    console.log("Remaining Macros:", remaining);
 
     return (
         <footer>
