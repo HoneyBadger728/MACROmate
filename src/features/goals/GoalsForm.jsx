@@ -6,12 +6,15 @@ function GoalsForm() {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
 
+    const [isEditing, setIsEditing] = useState(false);
     const [formGoals, setFormGoals] = useState({
         calories: "",
         protein: "",
         carbs: "",
         fat:"",
     });
+
+    const inputsDisabled = goals.isConfigured && !isEditing;
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -26,6 +29,18 @@ function GoalsForm() {
         event.preventDefault();
 
         dispatch(updateGoals(formGoals));
+        setIsEditing(false);
+    }
+
+    function handleStartEditing() {
+        setFormGoals({
+            calories: goals.calories,
+            protein: goals.protein,
+            carbs: goals.carbs,
+            fat: goals.fat,
+        });
+
+        setIsEditing(true);
     }
 
 
@@ -44,6 +59,7 @@ function GoalsForm() {
                         required
                         placeholder='e.g. 2000'
                         value={formGoals.calories}
+                        disabled={inputsDisabled}
                         onChange={handleChange}
                     />
                 </label>
@@ -58,6 +74,7 @@ function GoalsForm() {
                         required
                         placeholder='e.g. 200'
                         value={formGoals.protein}
+                        disabled={inputsDisabled}
                         onChange={handleChange}
                     />
                 </label>
@@ -72,6 +89,7 @@ function GoalsForm() {
                         required
                         placeholder='e.g. 75'
                         value={formGoals.carbs}
+                        disabled={inputsDisabled}
                         onChange={handleChange}
                     />
                 </label>
@@ -86,18 +104,24 @@ function GoalsForm() {
                         required
                         placeholder='e.g. 40'
                         value={formGoals.fat}
+                        disabled={inputsDisabled}
                         onChange={handleChange}
                     />
                 </label>
 
-                <button type="submit">Update Goals</button>
+                {goals.isConfigured && !isEditing ? (
+                    <button 
+                        type='button'
+                        onClick={handleStartEditing}
+                    >
+                        Update Goals
+                    </button>  
+                ) : (
+                    <button type='submit'>
+                        {goals.isConfigured ? "Save Changes" : "Set Goals"}
+                    </button>
+                )}
             </form>
-
-            <h3>Saved Goals:</h3>
-            <p>Calories: {goals.calories}</p>
-            <p>Protein: {goals.protein}</p>
-            <p>Carbs: {goals.carbs}</p>
-            <p>Fat: {goals.fat}</p>
         </section>
     );
 };

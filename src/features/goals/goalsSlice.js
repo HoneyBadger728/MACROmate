@@ -5,6 +5,7 @@ const initialState = {
     protein: 0,
     carbs: 0,
     fat: 0,
+    isConfigured: false,
 };
 
 const goalsSlice = createSlice({
@@ -15,7 +16,8 @@ const goalsSlice = createSlice({
             state.calories = action.payload.calories;
             state.protein = action.payload.protein;
             state.carbs = action.payload.carbs;
-            state.fat = action.payload.fat;    
+            state.fat = action.payload.fat;
+            state.isConfigured = true;    
         },
     },
 });

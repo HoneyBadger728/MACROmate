@@ -173,6 +173,19 @@ Approved
 
 ---
 
+### Goals Configuration
+
+Decision:
+- Pantry item creation and meal entries are permitted before the user sets macro goals. Features that depend on setting goals will indicate this necessity to the user.  
+
+Reasoning:
+- Pantry item creation and meal tracking are useful to users independently to goal progression. Giving the goals a set configuration state prevents from being interpreted as having a value of zero.
+
+Status:
+Approved
+
+---
+
 ## Technical Decisions
 
 ### UI State Management
