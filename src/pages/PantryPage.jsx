@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PantryList from "../features/pantry/PantryList";
 import AddFoodModal from "../features/pantry/AddFoodModal";
+import MacroProgressFooter from "../components/MacroProgressFooter";
 
 function PantryPage() {
     const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
@@ -18,6 +19,7 @@ function PantryPage() {
         )}
 
             <PantryList />
+            <MacroProgressFooter />
         </main>
     );
 }
