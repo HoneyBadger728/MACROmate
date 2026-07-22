@@ -15,7 +15,7 @@ const goalsSlice = createSlice({
             state.calories = action.payload.calories;
             state.protein = action.payload.protein;
             state.carbs = action.payload.carbs;
-            state.fats = action.payload.fat;    
+            state.fat = action.payload.fat;    
         },
     },
 });

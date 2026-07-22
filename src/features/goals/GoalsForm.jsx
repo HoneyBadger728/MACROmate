@@ -6,19 +6,25 @@ function GoalsForm() {
     const goals = useSelector((state) => state.goals);
     const dispatch = useDispatch();
 
-    const [formGoals, setFormGoals] = useState(goals);
+    const [formGoals, setFormGoals] = useState({
+        calories: "",
+        protein: "",
+        carbs: "",
+        fat:"",
+    });
 
     function handleChange(event) {
         const {name, value} = event.target;
 
         setFormGoals({
             ...formGoals,
-            [name]: Number(value),
+            [name]: value === "" ? "" : Number(value),
         });
     }
 
     function handleSubmit(event) {
         event.preventDefault();
+
         dispatch(updateGoals(formGoals));
     }
 
@@ -33,6 +39,10 @@ function GoalsForm() {
                     <input
                         type="number"
                         name="calories"
+                        min="0"
+                        step="any"
+                        required
+                        placeholder='e.g. 2000'
                         value={formGoals.calories}
                         onChange={handleChange}
                     />
@@ -43,6 +53,10 @@ function GoalsForm() {
                     <input
                         type="number"
                         name="protein"
+                        min="0"
+                        step="any"
+                        required
+                        placeholder='e.g. 200'
                         value={formGoals.protein}
                         onChange={handleChange}
                     />
@@ -53,6 +67,10 @@ function GoalsForm() {
                     <input
                         type="number"
                         name="carbs"
+                        min="0"
+                        step="any"
+                        required
+                        placeholder='e.g. 75'
                         value={formGoals.carbs}
                         onChange={handleChange}
                     />
@@ -63,6 +81,10 @@ function GoalsForm() {
                     <input
                         type="number"
                         name="fat"
+                        min="0"
+                        step="any"
+                        required
+                        placeholder='e.g. 40'
                         value={formGoals.fat}
                         onChange={handleChange}
                     />
@@ -75,7 +97,7 @@ function GoalsForm() {
             <p>Calories: {goals.calories}</p>
             <p>Protein: {goals.protein}</p>
             <p>Carbs: {goals.carbs}</p>
-            <p>Fats: {goals.fats}</p>
+            <p>Fat: {goals.fat}</p>
         </section>
     );
 };
