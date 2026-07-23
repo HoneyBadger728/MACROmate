@@ -186,6 +186,25 @@ Approved
 
 ---
 
+### Maximum Within Tagets - Edge Cases
+
+Decision:
+- Macros with a value of 0 will not be used to calculate an item's max quantity within set target.
+- If a target has been met or exceeded, max quantity is limited to 0g only if the item contains that macro.
+- Calculated max quantity of 0g will be displayed explicitly.
+- If an item max quantity is constrained by multiple macros, all relevant limiting factors will be displayed.
+- If a food has no macro values, then the app will indicate there is no macro-based limit. 
+
+Reasoning:
+- Prevents dividing by zero. 
+- Differentiates exceeded targets from constraints that don't apply to a given item.
+- Displays useful planning information about 0g quantity recommendations and specific constraints.
+
+Status:
+Approved
+
+---
+
 ## Technical Decisions
 
 ### UI State Management
