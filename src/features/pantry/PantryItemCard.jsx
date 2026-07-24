@@ -130,7 +130,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         const mealEntry = {
             id: crypto.randomUUID(),
             foodId: item.id,
-            quantityGrams: quantityGrams,
+            quantityGrams,
         };
 
         dispatch(addMealEntry(mealEntry));
@@ -190,94 +190,118 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                     g
                 </label>
 
-                <label>
-                    Calories:
-                    <input 
-                        type="number"
-                        name="caloriesPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={
-                            isEditing ? editFood.caloriesPer100g : displayedCalories
-                        }
-                        disabled={!isEditing}
-                        onChange={handleEditChange} 
-                    /> 
-                </label>
+                
+                
+                <div>
+                    {goals.isConfigured ? (
+                        guidance.maxGrams === null ? (
+                            <p>No macro-based limit.</p>
+                        ) : (
+                            <>
+                                <p>
+                                    Maximum Within Targets: {displayedMaxGrams}g
+                                </p>
 
-                <label>
-                    Protein:
-                    <input 
-                        type="number"
-                        name="proteinPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={
-                            isEditing ? editFood.proteinPer100g : displayedProtein
-                        }
-                        disabled={!isEditing}
-                        onChange={handleEditChange} 
-                    /> 
-                </label>
-
-                <label>
-                    Carbs:
-                    <input 
-                        type="number"
-                        name="carbsPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={
-                            isEditing ? editFood.carbsPer100g : displayedCarbs
-                        }
-                        disabled={!isEditing}
-                        onChange={handleEditChange} 
-                    /> 
-                </label>
-
-                <label>
-                    Fat:
-                    <input 
-                        type="number"
-                        name="fatPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={
-                            isEditing ? editFood.fatPer100g : displayedFat
-                        }
-                        disabled={!isEditing}
-                        onChange={handleEditChange} 
-                    /> 
-                </label>
-            
-            
+                                <p>
+                                    Limiting Factor
+                                    {guidance.limitingFactors.length > 1 ? "s" : ""}:{" "}
+                                    {guidance.limitingFactors.join(", ")}
+                                </p>
+                            </>
+                        )
+                    ) : (
+                        <p>Set your macro goals to see planning guidance.</p>
+                    )}
+                </div>
 
                 {isExpanded && (
+                    <>
+                        <label>
+                                Calories:
+                            <input 
+                                type="number"
+                                name="caloriesPer100g"
+                                required
+                                min="0"
+                                step="any"
+                                value={
+                                    isEditing ? editFood.caloriesPer100g : displayedCalories
+                                }
+                                disabled={!isEditing}
+                                onChange={handleEditChange} 
+                            /> 
+                        </label>
 
-                    isEditing ? (
-                        <button type="submit">
-                        Save Changes
-                        </button>
-                    ) : (
-                    <div>
-                        <button type="button" onClick={handleAddToMeals}>
-                            Add to Today's Meals
-                        </button>
+                        <label>
+                            Protein:
+                            <input 
+                                type="number"
+                                name="proteinPer100g"
+                                required
+                                min="0"
+                                step="any"
+                                value={
+                                    isEditing ? editFood.proteinPer100g : displayedProtein
+                                }
+                                disabled={!isEditing}
+                                onChange={handleEditChange} 
+                            /> 
+                        </label>
 
-                        <button type="button" onClick={handleStartEditing}>
-                            Edit Food
-                        </button>
+                        <label>
+                            Carbs:
+                            <input 
+                                type="number"
+                                name="carbsPer100g"
+                                required
+                                min="0"
+                                step="any"
+                                value={
+                                    isEditing ? editFood.carbsPer100g : displayedCarbs
+                                }
+                                disabled={!isEditing}
+                                onChange={handleEditChange} 
+                            /> 
+                        </label>
 
-                        <button type="button" onClick={() => setIsDeleteOpen(true)}>
-                            Delete Food
-                        </button>
-                    </div>
-                    ) 
+                        <label>
+                            Fat:
+                            <input 
+                                type="number"
+                                name="fatPer100g"
+                                required
+                                min="0"
+                                step="any"
+                                value={
+                                    isEditing ? editFood.fatPer100g : displayedFat
+                                }
+                                disabled={!isEditing}
+                                onChange={handleEditChange} 
+                            /> 
+                        </label>
+
+                        {isEditing ? (
+                            <button type="submit">
+                            Save Changes
+                            </button>
+                        ) : (
+                        <div>
+                            <button type="button" onClick={handleAddToMeals}>
+                                Add to Today's Meals
+                            </button>
+
+                            <button type="button" onClick={handleStartEditing}>
+                                Edit Food
+                            </button>
+
+                            <button type="button" onClick={() => setIsDeleteOpen(true)}>
+                                Delete Food
+                            </button>
+                        </div>
+                        )}
+                    </> 
                 )}
+                
             </form>
             {isDeleteOpen && (
                 <DeleteConfirmationModal
