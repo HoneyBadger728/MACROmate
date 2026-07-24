@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editPantryItem, deletePantryItem } from "./pantrySlice";
 import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
 import { addMealEntry } from "../meals/mealEntriesSlice";
+import { selectRemainingMacros } from "../meals/mealSelectors";
+import { calculateMaximumWithinTargets } from "./pantrySelectors";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
@@ -128,6 +130,10 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         dispatch(addMealEntry(mealEntry));
 
     }
+
+    const remaining = useSelector(selectRemainingMacros);
+
+    console.log(calculateMaximumWithinTargets(item, remaining))
 
     return (
         <article>

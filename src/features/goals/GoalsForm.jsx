@@ -33,6 +33,8 @@ function GoalsForm() {
     }
 
     function handleStartEditing() {
+        event.preventDefault();
+
         setFormGoals({
             calories: goals.calories,
             protein: goals.protein,
