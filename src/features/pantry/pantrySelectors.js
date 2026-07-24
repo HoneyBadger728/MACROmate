@@ -4,38 +4,38 @@ export function calculateMaximumWithinTargets(food, remaining) {
     const constraints = [];
 
     if (food.caloriesPer100g > 0) {
-        const maxGrams = remaining.calories / (food.caloriesPer100g / 100);
+        const maxGrams = remaining.calories <= 0 ? 0 : remaining.calories / (food.caloriesPer100g / 100);
 
         constraints.push({
             macro: "calories",
-            maxGrams: maxGrams,
+            maxGrams,
         });
     }
 
     if (food.proteinPer100g > 0) {
-        const maxGrams = remaining.protein / (food.proteinPer100g / 100);
+        const maxGrams = remaining.protein <= 0 ? 0 : remaining.protein / (food.proteinPer100g / 100);
 
         constraints.push({
             macro: "protein",
-            maxGrams: maxGrams,
+            maxGrams,
         });
     }
 
      if (food.carbsPer100g > 0) {
-        const maxGrams = remaining.carbs / (food.carbsPer100g / 100);
+        const maxGrams = remaining.carbs <= 0 ? 0 : remaining.carbs / (food.carbsPer100g / 100);
 
         constraints.push({
             macro: "carbs",
-            maxGrams: maxGrams,
+            maxGrams,
         });
     }
 
      if (food.fatPer100g > 0) {
-        const maxGrams = remaining.fat/ (food.fatPer100g / 100);
+        const maxGrams = remaining.fat <= 0 ? 0 : remaining.fat / (food.fatPer100g / 100);
 
         constraints.push({
             macro: "fat",
-            maxGrams: maxGrams,
+            maxGrams,
         });
     }
 
@@ -52,14 +52,17 @@ export function calculateMaximumWithinTargets(food, remaining) {
 
     const smallestMaxGrams = Math.min(...maxGramValues);
 
-    const limitingFactors = constraints.filter(
-        (constraint) => constraint.maxGrams === smallestMaxGrams).map(
+    const limitingFactors = constraints
+        .filter(
+            (constraint) => constraint.maxGrams === smallestMaxGrams
+        )
+        .map(
             (constraint) => constraint.macro
         );
 
     return {
         maxGrams: smallestMaxGrams,
-        limitingFactors: limitingFactors,
+        limitingFactors,
     };
 }
 

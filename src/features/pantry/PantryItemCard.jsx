@@ -37,6 +37,12 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     const displayedCarbs = item.carbsPer100g * quantityMultiplier;
     const displayedFat = item.fatPer100g * quantityMultiplier;
 
+    const goals = useSelector((state) => state.goals);
+    const remaining = useSelector(selectRemainingMacros);
+
+    const guidance = calculateMaximumWithinTargets(item, remaining);
+    const displayedMaxGrams = guidance.maxGrams === null ? null : Math.floor(guidance.maxGrams);
+
     function handleQuantityChange(event) {
         const value = event.target.value;
 
@@ -130,10 +136,6 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         dispatch(addMealEntry(mealEntry));
 
     }
-
-    const remaining = useSelector(selectRemainingMacros);
-
-    console.log(calculateMaximumWithinTargets(item, remaining))
 
     return (
         <article>
