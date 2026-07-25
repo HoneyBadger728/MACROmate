@@ -1,7 +1,7 @@
 
 
 function DeleteConfirmationModal({itemName, onConfirm, onClose}) {
-    return(
+    return (
         <div>
             <section
                 className="modal"

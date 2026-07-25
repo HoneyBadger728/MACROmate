@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editPantryItem, deletePantryItem } from "./pantrySlice";
 import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
+import EditNutritionWarningModal from "./EditNutritionWarningModal";
 import { addMealEntry } from "../meals/mealEntriesSlice";
 import { selectRemainingMacros } from "../meals/mealSelectors";
 import { calculateMaximumWithinTargets } from "./pantrySelectors";
@@ -13,6 +14,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
     const [quantityGrams, setQuantityGrams] = useState(100);
     const [isEditing, setIsEditing] = useState(false);
+    const [isEditWarningOpen, setIsEditWarningOpen] = useState(false);
     const [formError, setFormError] = useState("");
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const [editFood, setEditFood] = useState({
@@ -39,9 +41,16 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
     const goals = useSelector((state) => state.goals);
     const remaining = useSelector(selectRemainingMacros);
+    const mealEntries = useSelector((state) => state.mealEntries);
 
     const guidance = calculateMaximumWithinTargets(item, remaining);
     const displayedMaxGrams = guidance.maxGrams === null ? null : Math.floor(guidance.maxGrams);
+
+    const affectedMealCount = mealEntries.filter(
+        meal => meal.foodId === item.id
+    ).length;
+
+    const isUsedInMeals = affectedMealCount > 0;
 
     function handleQuantityChange(event) {
         const value = event.target.value;
@@ -58,6 +67,15 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleStartEditing() {
+        if (isUsedInMeals) {
+            setIsEditWarningOpen(true);
+            return;
+        }
+
+        beginEditing();
+    }
+
+    function beginEditing() {
         setFormError("");
 
         setEditFood({
@@ -308,6 +326,18 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                     itemName={item.name}
                     onClose={() => setIsDeleteOpen(false)}
                     onConfirm={handleDelete}
+                />
+            )}
+
+            {isEditWarningOpen && (
+                <EditNutritionWarningModal 
+                    itemName={item.name}
+                    affectedMealCount={affectedMealCount}
+                    onCancel={() => setIsEditWarningOpen(false)}
+                    onContinue={() => {
+                        setIsEditWarningOpen(false);
+                        beginEditing();
+                    }}
                 />
             )}       
         </article>
