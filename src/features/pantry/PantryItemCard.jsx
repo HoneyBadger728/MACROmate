@@ -338,6 +338,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
             {isDeleteOpen && (
                 <DeleteConfirmationModal
                     itemName={item.name}
+                    isUsedInMeals={isUsedInMeals}
                     onClose={() => setIsDeleteOpen(false)}
                     onConfirm={handleDelete}
                 />

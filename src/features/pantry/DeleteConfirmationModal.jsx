@@ -1,6 +1,6 @@
 
 
-function DeleteConfirmationModal({itemName, onConfirm, onClose}) {
+function DeleteConfirmationModal({itemName, isUsedInMeals, onConfirm, onClose}) {
     return (
         <div>
             <section
@@ -11,19 +11,35 @@ function DeleteConfirmationModal({itemName, onConfirm, onClose}) {
                 aria-describedby="delete-food-description"
             >
                 <h2 id="delete-food-title">
-                    Delete Food?
+                    {isUsedInMeals ? "Food is currently in use." : "Delete Food?"} 
                 </h2>
 
                 <p id="delete-food-description">
-                    Are you sure you want to delete <strong>{itemName}</strong> from your pantry?
+                    {isUsedInMeals ? (
+                        <>
+                            <strong>{itemName}</strong> is currently used in Today's Meals. 
+                            Remove it from Today's Meals before deleting it from your pantry.
+                        </>
+                    ) : (
+                        <>
+                            Are you sure you want to delete <strong>{itemName}</strong> from your pantry?
+                        </>
+                    )}
                 </p>
 
                 <div className="modal-actions">
-                    <button type="button" onClick={onClose}>
+                    <button 
+                        type="button" 
+                        onClick={onClose}
+                    >
                         Cancel 
                     </button>
 
-                    <button type="button" onClick={onConfirm}>
+                    <button 
+                        type="button" 
+                        onClick={onConfirm}
+                        disabled={isUsedInMeals}    
+                    >
                         Delete Food 
                     </button>
                 </div>
