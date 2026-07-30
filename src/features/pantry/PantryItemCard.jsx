@@ -6,6 +6,7 @@ import EditNutritionWarningModal from "./EditNutritionWarningModal";
 import { addMealEntry } from "../meals/mealEntriesSlice";
 import { selectRemainingMacros } from "../meals/mealSelectors";
 import { calculateMaximumWithinTargets } from "./pantrySelectors";
+import { normalizeFoodName } from "./pantryUtils";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
@@ -42,6 +43,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     const goals = useSelector((state) => state.goals);
     const remaining = useSelector(selectRemainingMacros);
     const mealEntries = useSelector((state) => state.mealEntries);
+    const pantryItems = useSelector((state) => state.pantry);
 
     const guidance = calculateMaximumWithinTargets(item, remaining);
     const displayedMaxGrams = guidance.maxGrams === null ? null : Math.floor(guidance.maxGrams);
@@ -112,6 +114,18 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
         if (!editFood.name.trim()) {
             setFormError("Please enter a valid food name.");
+            return;
+        }
+
+        const duplicateExists = pantryItems.some(
+            (pantryItem) => 
+                pantryItem.id !== item.id &&
+                normalizeFoodName(pantryItem.name) === 
+                normalizeFoodName(editFood.name)
+        );
+
+        if (duplicateExists) {
+            setFormError("A pantry item with this name already exists.");
             return;
         }
 

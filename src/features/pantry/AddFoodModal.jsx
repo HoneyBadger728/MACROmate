@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPantryItem } from "./pantrySlice";
+import { normalizeFoodName } from "./pantryUtils";
 
 function createPantryItem(formData) {
     return {
@@ -15,6 +16,8 @@ function createPantryItem(formData) {
 
 function AddFoodModal({ onClose }) {
     const dispatch = useDispatch();
+
+    const pantryItems = useSelector((state) => state.pantry);
 
     const [formError, setFormError] = useState("");
     const [newFood, setNewFood] = useState({
@@ -47,12 +50,21 @@ function AddFoodModal({ onClose }) {
             return;
         }
 
+        const duplicateExists = pantryItems.some(
+            (item) => normalizeFoodName(item.name) === normalizeFoodName(newFood.name)
+        );
+
+        if (duplicateExists) {
+            setFormError("A pantry item with this name already exists");
+            return;
+        }
+
         setFormError("");
 
-        const pantryItem = createPantryItem(newFood)
+        const pantryItem = createPantryItem(newFood);
 
-            dispatch(addPantryItem(pantryItem));
-            onClose();
+        dispatch(addPantryItem(pantryItem));
+        onClose();
     }
     
     
