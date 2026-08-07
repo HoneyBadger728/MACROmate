@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PantryList from "../features/pantry/PantryList";
 import AddFoodModal from "../features/pantry/AddFoodModal";
-import MacroProgressFooter from "../components/MacroProgressFooter";
+import MacroProgressFooter from "../components/MacroProgressDock";
 
 function PantryPage() {
     const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);

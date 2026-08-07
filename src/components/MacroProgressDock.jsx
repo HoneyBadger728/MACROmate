@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectMealTotals } from "../features/meals/mealSelectors";
 
 
-function MacroProgressFooter() {
+function MacroProgressDock() {
     const totals = useSelector(selectMealTotals);
     const goals = useSelector((state) => state.goals)
 
@@ -16,4 +16,4 @@ function MacroProgressFooter() {
     );
 }
 
-export default MacroProgressFooter;
+export default MacroProgressDock;

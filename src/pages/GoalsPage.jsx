@@ -1,5 +1,5 @@
 import GoalsForm from "../features/goals/GoalsForm";
-import MacroProgressFooter from "../components/MacroProgressFooter";
+import MacroProgressFooter from "../components/MacroProgressDock";
 
 function GoalsPage() {
     return (
