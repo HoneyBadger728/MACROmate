@@ -142,5 +142,5 @@ svg {
 
 ::selection {
   color: var(--color-text-primary);
-  background-color: rgba(67 196 107 / 35%);
+  background-color: rgba(67, 196, 107 / .35);
 }
