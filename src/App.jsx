@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
+import Navigation from './components/Navigation';
 import GoalsPage from './pages/GoalsPage';
 import PantryPage from './pages/PantryPage';
 import MealEntriesPage from './pages/MealEntriesPage';
@@ -7,15 +7,18 @@ import './App.css';
 
 function App() {
   return (
-    <>
-      <Header />
+    <div className='app-shell'>
+      <main className='app-content'>
+        <Routes>
+          <Route path="/" element={<GoalsPage />} />
+          <Route path="/pantry" element={<PantryPage />} />
+          <Route path="/meals" element={<MealEntriesPage />} />
+        </Routes>
+      </main>
 
-      <Routes>
-        <Route path="/" element={<GoalsPage />} />
-        <Route path="/pantry" element={<PantryPage />} />
-        <Route path="/meals" element={<MealEntriesPage />} />
-      </Routes>
-    </>
+      <Navigation />
+      
+    </div>
   );
 }
 
