@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import MacroProgressDock from './components/MacroProgressDock';
 import GoalsPage from './pages/GoalsPage';
 import PantryPage from './pages/PantryPage';
 import MealEntriesPage from './pages/MealEntriesPage';
@@ -16,6 +17,7 @@ function App() {
         </Routes>
       </main>
 
+      <MacroProgressDock />
       <Navigation />
       
     </div>

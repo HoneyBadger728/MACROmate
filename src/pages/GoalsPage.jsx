@@ -1,12 +1,10 @@
 import GoalsForm from "../features/goals/GoalsForm";
-import MacroProgressFooter from "../components/MacroProgressDock";
 
 function GoalsPage() {
     return (
         <main>  
             <h2>Goals</h2>
             <GoalsForm />
-            <MacroProgressFooter />
         </main>
     );
 }
