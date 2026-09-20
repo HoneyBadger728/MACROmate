@@ -24,7 +24,7 @@ function MacroProgressDock() {
             </p>
 
             <p className="macro-dock__item macro-dock__item--carbs">
-                <span className="macro-dock__label">Carbss:</span> 
+                <span className="macro-dock__label">Carbs:</span> 
                 <span className="macro-dock__value">
                     {totals.carbs} / {goals.carbs}
                 </span>
