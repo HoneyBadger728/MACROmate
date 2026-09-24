@@ -1,14 +1,10 @@
 import { useSelector } from "react-redux";
 import MealEntryCard from "./MealEntryCard";
 
+
 function MealEntriesList() {
     const mealEntries = useSelector((state) => state.mealEntries);
     const pantryItems = useSelector((state) => state.pantry);
-
-    
-    function handleDeleteMealEntry(entryId) {
-        dispatch(deleteMealEntry(entryId))
-    }
 
     if (mealEntries.length === 0) {
         return <p>No foods added to Today's Meals yet.</p>;
@@ -16,7 +12,8 @@ function MealEntriesList() {
 
     return (
         <section>
-            {mealEntries.map((entry) => {
+            <span>
+               {mealEntries.map((entry) => {
                 const food = pantryItems.find(
                     (item) => item.id === entry.foodId 
                 );
@@ -32,7 +29,9 @@ function MealEntriesList() {
                         food={food}
                     />
                 );
-            })}
+            })} 
+            </span>
+            
         </section>
     );
 }
