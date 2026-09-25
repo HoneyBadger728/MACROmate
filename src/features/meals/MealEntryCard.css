@@ -8,3 +8,59 @@
     border-radius: var(--radius-medium);
     box-shadow: var(--shadow-small);
 }
+
+.meal-card__name {
+    margin-bottom: 0.75rem;
+
+    font-size: var(--font-size-large);
+}
+
+.meal-card__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    margin-bottom: 1rem;
+}
+
+.meal-card__quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.meal-card__quantity-input {
+    width: 5rem;
+}
+
+.meal-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.meal-card__macros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.meal-card__macro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    min-width: 0;
+}
+
+.meal-card__macro-label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+}
+
+.meal-card__macro-value {
+    color: var(--color-text-primary);
+    font-weight: 700;
+}

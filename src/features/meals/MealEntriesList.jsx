@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import MealEntryCard from "./MealEntryCard";
-
+import "./MealEntriesList.css";
 
 function MealEntriesList() {
     const mealEntries = useSelector((state) => state.mealEntries);
@@ -11,9 +11,8 @@ function MealEntriesList() {
     }
 
     return (
-        <section>
-            <span>
-               {mealEntries.map((entry) => {
+        <section className="meal-list">
+            {mealEntries.map((entry) => {
                 const food = pantryItems.find(
                     (item) => item.id === entry.foodId 
                 );
@@ -29,9 +28,7 @@ function MealEntriesList() {
                         food={food}
                     />
                 );
-            })} 
-            </span>
-            
+            })}    
         </section>
     );
 }
