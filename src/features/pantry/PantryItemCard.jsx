@@ -155,12 +155,17 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     function handleAddToMeals() {
+        const id = typeof globalThis.crypto?.randomUUID === "function"
+        ? globalThis.crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+        
         if (quantityGrams === "" || quantityGrams <= 0) {
             return;
         }
         
         const mealEntry = {
-            id: crypto.randomUUID(),
+            id,
             foodId: item.id,
             quantityGrams,
         };

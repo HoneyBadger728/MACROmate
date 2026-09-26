@@ -4,8 +4,12 @@ import { addPantryItem } from "./pantrySlice";
 import { normalizeFoodName } from "./pantryUtils";
 
 function createPantryItem(formData) {
+    const id = typeof globalThis.crypto?.randomUUID === "function"
+        ? globalThis.crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
     return {
-            id: crypto.randomUUID(),
+            id,
             name: formData.name.trim(),
             caloriesPer100g: Number(formData.caloriesPer100g),
             proteinPer100g: Number(formData.proteinPer100g),
