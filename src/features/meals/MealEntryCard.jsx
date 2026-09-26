@@ -63,7 +63,7 @@ function MealEntryCard({ entry, food }) {
                         onChange={handleQuantityChange}
                     />   
                         
-                    <span className="meal-card__quantity--unit">{quantityUnit}</span>   
+                    <span className="meal-card__quantity-unit">{quantityUnit}</span>   
                 </label>
 
                 <div className="meal-card__actions">
@@ -104,21 +104,21 @@ function MealEntryCard({ entry, food }) {
                 <div className="meal-card__macro meal-card__macro--protein">
                     <span className="meal-card__macro-label">Protein</span>
                     <span className="meal-card__macro-value">{protein}
-                        <span className="meal-card__macro--unit">{macroUnit}</span>
+                        <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>
                 
                 <div className="meal-card__macro meal-card__macro--carbs">
                     <span className="meal-card__macro-label">Carbs</span>
                     <span className="meal-card__macro-value">{carbs}
-                        <span className="meal-card__macro--unit">{macroUnit}</span>
+                        <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>
                 
                 <div className="meal-card__macro meal-card__macro--fat">
                     <span className="meal-card__macro-label">Fat</span>
                     <span className="meal-card__macro-value">{fat}
-                        <span className="meal-card__macro--unit">{macroUnit}</span>
+                        <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>
             </div>
