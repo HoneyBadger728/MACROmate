@@ -1,0 +1,126 @@
+
+
+.pantry-card {
+    padding: 1rem;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-small);
+}
+
+.pantry-card__header {
+    margin-bottom: .75rem;
+}
+
+.pantry-card__name {
+    margin: 0;
+    
+    font-size: var(--font-size-large);
+}
+
+.pantry-card__controls {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+
+    margin-bottom: 0.75rem;
+}
+
+.pantry-card__toggle {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+
+    color: var(--color-text-secondary);
+    background-color: var(--color-surface-elevated);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-small);
+}
+
+.pantry-card__quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.pantry-card__quantity-label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+}
+
+.pantry-card__quantity-input {
+    min-width: 1rem;
+    max-width: 5rem;
+    padding: 0.25rem .375rem;
+
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-elevated);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    transition: 
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast); 
+}
+
+.pantry-card__quantity-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.pantry-card__quantity-input:focus-visible {
+    outline: none;
+
+    box-shadow:
+        0 0 0 1px var(--color-primary),
+        0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
+}
+
+.pantry-card__quantity-unit {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+}
+
+.pantry-card__guidance {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.pantry-card__max,
+.pantry-card__limiting,
+.pantry-card__guidance-text {
+    margin: 0;
+}
+
+.pantry-card__max,
+.pantry-card__limiting {
+    display: flex;
+    align-items: baseline;
+    gap: 0.375rem;
+}
+
+.pantry-card__max-label,
+.pantry-card__limiting-label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+}
+
+.pantry-card__max-value {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.pantry-card__limiting-value {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}

@@ -7,6 +7,7 @@ import { addMealEntry } from "../meals/mealEntriesSlice";
 import { selectRemainingMacros } from "../meals/mealSelectors";
 import { calculateMaximumWithinTargets } from "./pantrySelectors";
 import { normalizeFoodName } from "./pantryUtils";
+import "./PantryItemCard.css";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
@@ -25,6 +26,9 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         carbsPer100g: item.carbsPer100g,
         fatPer100g: item.fatPer100g,
     });
+
+    const quantityUnit = "g";
+    
 
     useEffect(() => {
         if (!isExpanded) {
@@ -175,79 +179,101 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     }
 
     return (
-        <article>
-            <form onSubmit={handleSaveEditing}>
-                {isEditing ? (
-                    <label>
-                        Food Name:
-                        <input 
-                            type="text"
-                            name="name"
-                            required
-                            value={editFood.name}
-                            onChange={handleEditChange}
-                            aria-describedby={
-                                formError ? formErrorId : undefined
-                            }
-                        />
-                    </label>
-                ) : (
-                    <h3>{item.name}</h3>
-                )}
+        <article className="pantry-card">
+            <form className="pantry-card__form" onSubmit={handleSaveEditing}>
+                <div className="pantry-card__header">
+                    {isEditing ? (
+                        <label className="pantry-card__name-field">
+                            <span className="pantry-card__name-label">Food Name:</span>
+                            <input 
+                                className="pantry-card__name-input"
+                                type="text"
+                                name="name"
+                                required
+                                value={editFood.name}
+                                onChange={handleEditChange}
+                                aria-describedby={
+                                    formError ? formErrorId : undefined
+                                }
+                            />
+                        </label>
+                    ) : (
+                        <h3 className="pantry-card__name">{item.name}</h3>
+                    )} 
+                </div>
 
-                {formError && (
-                    <p id={formErrorId} role="alert">
+                   {formError && (
+                    <p 
+                        className="pantry-card__error"
+                        id={formErrorId} 
+                        role="alert"
+                    >
                         {formError}
                     </p>
                 )}
+                
+                <div className="pantry-card__controls">
+                    <button
+                        className="pantry-card__toggle"
+                        type="button"
+                        onClick={handleToggleCard}
+                        aria-expanded={isExpanded}
+                        aria-label={isExpanded ? `Collapse ${item.name}` : `Expand ${item.name}`}
+                    >
+                        <span aria-hidden="true">
+                            {isExpanded ? "▲" : "▼"}
+                        </span>
+                    </button>
+                
 
-                <button
-                    type="button"
-                    onClick={handleToggleCard}
-                    aria-expanded={isExpanded}
-                    aria-label={isExpanded ? `Collapse ${item.name}` : `Expand ${item.name}`}
-                >
-                    <span aria-hidden="true">
-                        {isExpanded ? "▲" : "▼"}
-                    </span>
-                </button>
-                
-                
-                <label>
-                    Quantity:
-                    <input 
-                        type="number"
-                        min="0"
-                        step="any"
-                        value={quantityGrams}
-                        disabled={isEditing}
-                        onChange={handleQuantityChange}
-                        onFocus={handleQuantityFocus} 
-                    />
-                    g
-                </label>
+                    <label className="pantry-card__quantity">
+                        <span className="pantry-card__quantity-label">Quantity:</span>
+                        <input
+                            className="pantry-card__quantity-input" 
+                            type="number"
+                            min="0"
+                            step="any"
+                            value={quantityGrams}
+                            disabled={isEditing}
+                            onChange={handleQuantityChange}
+                            onFocus={handleQuantityFocus} 
+                        />
+                        <span className="pantry-card__quantity-unit">{quantityUnit}</span>
+                    </label>
+                </div>
 
                 
                 
-                <div>
+                <div className="pantry-card__guidance">
                     {goals.isConfigured ? (
                         guidance.maxGrams === null ? (
-                            <p>No macro-based limit.</p>
+                            <p className="pantry-card__guidance-text">No macro-based limit.</p>
                         ) : (
                             <>
-                                <p>
-                                    Maximum Within Targets: {displayedMaxGrams}g
+                                <p className="pantry-card__max">
+                                    <span className="pantry-card__max-label">
+                                        Maximum Within Targets:
+                                    </span> 
+                                    <span className="pantry-card__max-value">
+                                        {displayedMaxGrams}{quantityUnit}
+                                    </span>
                                 </p>
 
-                                <p>
-                                    Limiting Factor
-                                    {guidance.limitingFactors.length > 1 ? "s" : ""}:{" "}
-                                    {guidance.limitingFactors.join(", ")}
+                                <p className="pantry-card__limiting">
+                                    <span className="pantry-card__limiting-label">
+                                        Limiting Factor
+                                        {guidance.limitingFactors.length > 1 ? "s" : ""}:{" "}
+                                    </span>
+                                    <span className="pantry-card__limiting-value">
+                                        {guidance.limitingFactors.join(", ")}
+                                    </span>
                                 </p>
                             </>
                         )
                     ) : (
-                        <p>Set your macro goals to see planning guidance.</p>
+                        <p className="pantry-card__guidance-text">
+                            Set your macro goals to see planning guidance.
+                        </p>
                     )}
                 </div>
 
