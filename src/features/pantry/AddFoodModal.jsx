@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPantryItem } from "./pantrySlice";
 import { normalizeFoodName } from "./pantryUtils";
+import "../../components/Modal.css"
+import "./AddFoodModal.css"
 
 function createPantryItem(formData) {
     const id = typeof globalThis.crypto?.randomUUID === "function"
@@ -80,12 +82,21 @@ function AddFoodModal({ onClose }) {
                 aria-modal="true"
                 aria-labelledby="add-pantry-item-title"
             >
-                <h2 id="add-pantry-item-title">Add Pantry Item</h2>
+                <h2 
+                    className="modal__title"
+                    id="add-pantry-item-title"
+                >
+                    Add Custom Food
+                </h2>
 
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Food Name:
+                <form className="add-food" onSubmit={handleSubmit}>
+                    <label className="add-food__field">
+                        <span className="add-food__label">
+                            Food Name
+                        </span>
+                        
                         <input 
+                        className="add-food__input"
                         type="text"
                         name="name"
                         required
@@ -98,66 +109,103 @@ function AddFoodModal({ onClose }) {
                     </label>
 
                     {formError && (
-                        <p id="add-food-error" role="alert">
+                        <p 
+                            className="add-food__error"
+                            id="add-food-error" 
+                            role="alert">
                             {formError}    
                         </p>
                     )}
 
-                    <label>
-                        Calories Per 100g:
-                        <input 
-                        type="number"
-                        name="caloriesPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={newFood.caloriesPer100g}
-                        onChange={handleChange} 
-                        />
-                    </label>
+                    <p className="add-food__nutrition-title">
+                        Nutrition per 100g
+                    </p>
 
-                    <label>
-                        Protein Per 100g:
-                        <input 
-                        type="number"
-                        name="proteinPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={newFood.proteinPer100g}
-                        onChange={handleChange} 
-                        />
-                    </label>
+                    <div className="add-food__nutrition">
+                        <label className="add-food__macro">
+                            <span className="add-food__macro-label">
+                                Calories
+                            </span>
+                             
+                            <input
+                            className="add-food__macro-input" 
+                            type="number"
+                            name="caloriesPer100g"
+                            required
+                            min="0"
+                            step="any"
+                            value={newFood.caloriesPer100g}
+                            onChange={handleChange} 
+                            />
+                        </label>
 
-                    <label>
-                        Carbs Per 100g:
-                        <input 
-                        type="number"
-                        name="carbsPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={newFood.carbsPer100g}
-                        onChange={handleChange} 
-                        />
-                    </label>
+                        <label className="add-food__macro">
+                            <span className="add-food__macro-label">
+                                Protein
+                            </span>
 
-                    <label>
-                        Fat Per 100g:
-                        <input 
-                        type="number"
-                        name="fatPer100g"
-                        required
-                        min="0"
-                        step="any"
-                        value={newFood.fatPer100g}
-                        onChange={handleChange} 
-                        />
-                    </label>
-                    <div className="modal-actions">
-                        <button type="submit">Save Food</button>
+                            <input 
+                            className="add-food__macro-input" 
+                            type="number"
+                            name="proteinPer100g"
+                            required
+                            min="0"
+                            step="any"
+                            value={newFood.proteinPer100g}
+                            onChange={handleChange} 
+                            />
+                        </label>
 
-                        <button type="button" onClick={onClose}>Cancel</button>
+                        <label className="add-food__macro">
+                            <span className="add-food__macro-label">
+                                Carbs
+                            </span>
+
+                            <input
+                            className="add-food__macro-input"  
+                            type="number"
+                            name="carbsPer100g"
+                            required
+                            min="0"
+                            step="any"
+                            value={newFood.carbsPer100g}
+                            onChange={handleChange} 
+                            />
+                        </label>
+
+                        <label className="add-food__macro">
+                            <span className="add-food__macro-label">
+                                Fat
+                            </span>
+
+                            <input
+                            className="add-food__macro-input"  
+                            type="number"
+                            name="fatPer100g"
+                            required
+                            min="0"
+                            step="any"
+                            value={newFood.fatPer100g}
+                            onChange={handleChange} 
+                            />
+                        </label>
+                    </div>
+                    
+                    <div className="modal__actions">
+                        <button 
+                            className="modal__action modal__action--primary"
+                            type="submit"
+                        >
+                            Add to Pantry
+                        </button>
+
+                        <button 
+                            className="modal__action modal__action--secondary"    
+                            type="button" 
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </form>
             </section>
