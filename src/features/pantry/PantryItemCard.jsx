@@ -28,6 +28,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
     });
 
     const quantityUnit = "g";
+    const macroUnit = "g";
     
 
     useEffect(() => {
@@ -278,91 +279,143 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                 </div>
 
                 {isExpanded && (
-                    <>
-                        <label>
-                                Calories:
-                            <input 
-                                type="number"
-                                name="caloriesPer100g"
-                                required
-                                min="0"
-                                step="any"
-                                value={
-                                    isEditing ? editFood.caloriesPer100g : displayedCalories
-                                }
-                                disabled={!isEditing}
-                                onChange={handleEditChange} 
-                            /> 
-                        </label>
+                    <div className="pantry-card__details">   
+                        {isEditing && (
+                            <p className="pantry-card__nutrition-edit-title">
+                                Nutrition per 100g
+                            </p>
+                        )}
+                       
+                       <div className="pantry-card__nutrition">
+                            <label className="pantry-card__macro pantry-card__macro--calories">
+                                <span className="pantry-card__macro-label">
+                                    Calories:
+                                </span>
+                                
+                                <span className="pantry-card__macro-control">
+                                    <input
+                                    className="pantry-card__macro-input" 
+                                    type="number"
+                                    name="caloriesPer100g"
+                                    required
+                                    min="0"
+                                    step="any"
+                                    value={
+                                        isEditing ? editFood.caloriesPer100g : displayedCalories
+                                    }
+                                    disabled={!isEditing}
+                                    onChange={handleEditChange} 
+                                    />   
+                                </span>
+                              
+                            </label>
 
-                        <label>
-                            Protein:
-                            <input 
-                                type="number"
-                                name="proteinPer100g"
-                                required
-                                min="0"
-                                step="any"
-                                value={
-                                    isEditing ? editFood.proteinPer100g : displayedProtein
-                                }
-                                disabled={!isEditing}
-                                onChange={handleEditChange} 
-                            /> 
-                        </label>
+                            <label className="pantry-card__macro pantry-card__macro--protein">
+                                <span className="pantry-card__macro-label">
+                                    Protein:
+                                </span>
+                                
+                                <span className="pantry-card__macro-control">
+                                    <input
+                                        className="pantry-card__macro-input"
+                                        type="number"
+                                        name="proteinPer100g"
+                                        required
+                                        min="0"
+                                        step="any"
+                                        value={
+                                            isEditing ? editFood.proteinPer100g : displayedProtein
+                                        }
+                                        disabled={!isEditing}
+                                        onChange={handleEditChange} 
+                                    />
 
-                        <label>
-                            Carbs:
-                            <input 
-                                type="number"
-                                name="carbsPer100g"
-                                required
-                                min="0"
-                                step="any"
-                                value={
-                                    isEditing ? editFood.carbsPer100g : displayedCarbs
-                                }
-                                disabled={!isEditing}
-                                onChange={handleEditChange} 
-                            /> 
-                        </label>
+                                    <span className="pantry-card__macro-unit">{macroUnit}</span>
+                                </span> 
+                            </label>
 
-                        <label>
-                            Fat:
-                            <input 
-                                type="number"
-                                name="fatPer100g"
-                                required
-                                min="0"
-                                step="any"
-                                value={
-                                    isEditing ? editFood.fatPer100g : displayedFat
-                                }
-                                disabled={!isEditing}
-                                onChange={handleEditChange} 
-                            /> 
-                        </label>
+                            <label className="pantry-card__macro pantry-card__macro--carbs">
+                                <span className="pantry-card__macro-label">
+                                    Carbs:
+                                </span>
+                                
+                                <span className="pantry-card__macro-control">
+                                    <input
+                                        className="pantry-card__macro-input"
+                                        type="number"
+                                        name="carbsPer100g"
+                                        required
+                                        min="0"
+                                        step="any"
+                                        value={
+                                            isEditing ? editFood.carbsPer100g : displayedCarbs
+                                        }
+                                        disabled={!isEditing}
+                                        onChange={handleEditChange} 
+                                    /> 
 
+                                    <span className="pantry-card__macro-unit">{macroUnit}</span>
+                                </span>
+                            </label>
+
+                            <label className="pantry-card__macro pantry-card__macro--fat">
+                                <span className="pantry-card__macro-label">
+                                    Fat:
+                                </span>
+                                
+                                <span className="pantry-card__macro-control">
+                                    <input
+                                        className="pantry-card__macro-input"
+                                        type="number"
+                                        name="fatPer100g"
+                                        required
+                                        min="0"
+                                        step="any"
+                                        value={
+                                            isEditing ? editFood.fatPer100g : displayedFat
+                                        }
+                                        disabled={!isEditing}
+                                        onChange={handleEditChange} 
+                                    /> 
+                                    <span className="pantry-card__macro-unit">{macroUnit}</span>
+                                </span>
+                            </label>
+                        </div>
                         {isEditing ? (
-                            <button type="submit">
-                            Save Changes
+                            <button 
+                                className="pantry-card__action pantry-card__action--save"
+                                type="submit"
+                            >
+                                Save Changes
                             </button>
                         ) : (
-                        <div>
-                            <button type="button" onClick={handleAddToMeals}>
-                                Add to Today's Meals
-                            </button>
+                            <div className="pantry-card__actions">
+                                <button 
+                                    className="pantry-card__action pantry-card__action--add"
+                                    type="button" 
+                                    onClick={handleAddToMeals}
+                                >
+                                    Add to Today's Meals
+                                </button>
 
-                            <button type="button" onClick={handleStartEditing}>
-                                Edit Food
-                            </button>
+                                <button 
+                                    className="pantry-card__action pantry-card__action--edit"
+                                    type="button" 
+                                    onClick={handleStartEditing}
+                                >
+                                    Edit Food
+                                </button>
 
-                            <button type="button" onClick={() => setIsDeleteOpen(true)}>
-                                Delete Food
-                            </button>
-                        </div>
-                        )}
-                    </> 
+                                <button
+                                    className="pantry-card__action pantry-card__action--delete" 
+                                    type="button" 
+                                    onClick={() => setIsDeleteOpen(true)}
+                                >
+                                    Delete Food
+                                </button>
+                            </div>
+                        )}  
+                    </div>
                 )}
                 
             </form>
