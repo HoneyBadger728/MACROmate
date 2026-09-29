@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import PantryItemCard from "./PantryItemCard";
+import "./PantryList.css"
 
 function PantryList() {
     const pantryItems = useSelector((state) => state.pantry);
@@ -11,7 +12,7 @@ function PantryList() {
     }
 
     return (
-        <section>
+        <section className="pantry-list">
             {pantryItems.length === 0 ? (
                 <p>Your pantry is currently empty. Add a food to get started.</p>
             ) : (

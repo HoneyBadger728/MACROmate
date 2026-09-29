@@ -1,24 +1,41 @@
 import { useState } from "react";
 import PantryList from "../features/pantry/PantryList";
 import AddFoodModal from "../features/pantry/AddFoodModal";
+import "./PantryPage.css"
 
 function PantryPage() {
     const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
 
     return (
-        <main>  
-            <h2>My Pantry</h2>
+        <section className="pantry-page">  
+            <div className="pantry-page__header">
+                <h2 className="pantry-page__title">My Pantry</h2>
 
-        <button type="button" onClick={() => setIsAddFoodOpen(true)}>
-            Add Food
-        </button>
+                <div className="pantry-page__actions">
+                    <button
+                        className="pantry-page__action pantry-page__action--find"
+                        type="button"
+                        disabled
+                    >
+                        Find Foods
+                    </button>
+                    
+                    <button 
+                        className="pantry-page__action pantry-page__action--custom"
+                        type="button" 
+                        onClick={() => setIsAddFoodOpen(true)}
+                    >
+                        Add Custom Food
+                    </button>
+                </div>
+            </div>
 
-        {isAddFoodOpen && (
-            <AddFoodModal onClose={() => setIsAddFoodOpen(false)} />
-        )}
+            {isAddFoodOpen && (
+                <AddFoodModal onClose={() => setIsAddFoodOpen(false)} />
+            )}
 
             <PantryList />
-        </main>
+        </section>
     );
 }
 
