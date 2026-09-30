@@ -1,22 +1,11 @@
 
 
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 1rem;
-
+.modal::backdrop {
     background-color: rgb(0 0 0 / 0.65);
-
-    z-index: 200;
 }
 
 .modal {
-    width: 100%;
+    width: calc(100% - .75rem);
     max-width: 30rem;
     max-height: calc(100vh - 2rem);
     overflow-y: auto;
@@ -26,4 +15,62 @@
     background-color: var(--color-surface);
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-large);
+    box-shadow: var(--shadow-large);
+}
+
+.modal__title {
+    margin-bottom: 1rem;
+}
+
+.modal__actions {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.modal__action {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+
+    color: var(--color-text-secondary);
+    background-color: transparent;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    font-size: var(--font-size-small);
+    font-weight: 600;
+
+    transition: 
+        color var(--transition-fast),
+        background-color var(--transition-fast), 
+        border-color var(--transition-fast);
+}
+
+.modal__action--primary {
+    color: var(--color-text-on-accent);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.modal__action--primary:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+.modal__action--primary:active {
+    background-color: var(--color-primary-active);
+    border-color: var(--color-primary-active);
+}
+
+.modal__action--secondary:hover,
+.modal__action--secondary:active {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-hover);
+}
+
+.modal__action:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 
+        0 0 0 1px var(--color-primary),
+        0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }

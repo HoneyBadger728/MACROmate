@@ -88,15 +88,14 @@ function AddFoodModal({ onClose }) {
                     </span>
                     
                     <input 
-                    className="add-food__input"
+                    className={`add-food__input${formError ? " add-food__input--error" : ""}`}
                     type="text"
                     name="name"
                     required
                     value={newFood.name}
                     onChange={handleChange}
-                    aria-describedby={
-                        formError ? "add-food-error" : undefined
-                    } 
+                    aria-describedby={formError ? "add-food-error" : undefined}
+                    aria-invalid={formError ? "true" : undefined} 
                     />
                 </label>
 
