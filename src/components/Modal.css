@@ -82,7 +82,22 @@
 .modal__action--danger:active {
     background-color: var(--color-danger-active);
     border-color: var(--color-danger-active);        
-}   
+}
+
+.modal__action--warning {
+    color: var(--color-warning);
+    background-color: transparent;
+    border-color: var(--color-warning);
+}
+
+.modal__action--warning:hover {
+    color: var(--color-text-primary);
+    background-color: hsl(from var(--color-warning) h s l / 0.15);
+}
+
+.modal__action--warning:active {
+    background-color: hsl(from var(--color-warning) h s l / 0.25);
+}
 
 .modal__action:focus-visible {
     outline: none;
