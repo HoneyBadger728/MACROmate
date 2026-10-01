@@ -2,6 +2,7 @@
 
 .modal::backdrop {
     background-color: rgb(0 0 0 / 0.65);
+    backdrop-filter: blur(2px);
 }
 
 .modal {
@@ -66,6 +67,22 @@
     color: var(--color-text-primary);
     background-color: var(--color-surface-hover);
 }
+
+.modal__action--danger {
+    color: var(--color-text-primary);
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+.modal__action--danger:hover {
+    background-color: var(--color-danger-hover);
+    border-color: var(--color-danger-hover);        
+}
+
+.modal__action--danger:active {
+    background-color: var(--color-danger-active);
+    border-color: var(--color-danger-active);        
+}   
 
 .modal__action:focus-visible {
     outline: none;

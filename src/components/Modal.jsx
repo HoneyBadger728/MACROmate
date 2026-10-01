@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./Modal.css"
 
-function Modal({title, titleId, onClose, children}) {
+function Modal({title, titleId, descriptionId, onClose, children}) {
     const dialogRef = useRef(null);
 
     useEffect(() => {
@@ -39,7 +39,8 @@ function Modal({title, titleId, onClose, children}) {
         <dialog
             className="modal"
             ref={dialogRef}
-            aria-labelledby={titleId} 
+            aria-labelledby={titleId}
+            aria-describedby={descriptionId} 
         >
             <h2 className="modal__title" id={titleId}>
                 {title}

@@ -26,6 +26,8 @@
   --color-success: #4fc77a;
   --color-warning: #e0aa42;
   --color-danger: #e36a6a;
+  --color-danger-hover: #eb7979;
+  --color-danger-active: #cb5f5f;
   --color-info: #63a4e8;
 
   --font-family-sans:
