@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteMealEntry, editMealEntryQuantity } from "./mealEntriesSlice";
 import "./MealEntryCard.css";
@@ -8,6 +8,15 @@ function MealEntryCard({ entry, food }) {
 
     const [isEditing, setIsEditing] = useState(false);
     const [quantityGrams, setQuantityGrams] = useState(entry.quantityGrams);
+
+    const quantityInputRef = useRef(null)
+
+    useEffect(() => {
+        if (isEditing) {
+            quantityInputRef.current?.focus();
+            quantityInputRef.current?.select();
+        }
+    }, [isEditing])
 
     const quantityMultiplier = (Number(quantityGrams) || 0) / 100;
     
@@ -40,6 +49,12 @@ function MealEntryCard({ entry, food }) {
         setIsEditing(false);
     }
 
+    function handleQuantityKeyDown(event) {
+        if (event.key === "Enter" && isEditing) {
+            handleSave();
+        }
+    }
+
     function handleDelete() {
         dispatch(deleteMealEntry(entry.id));
     }
@@ -53,7 +68,8 @@ function MealEntryCard({ entry, food }) {
                     <span className="meal-card__quantity-label">Quantity</span> 
                         
                         
-                    <input 
+                    <input
+                        ref={quantityInputRef} 
                         className="meal-card__quantity-input"
                         type="number"
                         min="0"
@@ -61,6 +77,7 @@ function MealEntryCard({ entry, food }) {
                         value={quantityGrams}
                         disabled={!isEditing}
                         onChange={handleQuantityChange}
+                        onKeyDown={handleQuantityKeyDown}
                     />   
                         
                     <span className="meal-card__quantity-unit">{quantityUnit}</span>   
