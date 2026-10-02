@@ -68,6 +68,7 @@
     margin-bottom: 0.75rem;
 }
 
+
 .pantry-card__toggle {
     flex-shrink: 0;
 
@@ -83,6 +84,10 @@
     background-color: var(--color-surface-elevated);
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-small);
+
+    transition: 
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast); 
 }
 
 .pantry-card__quantity {
@@ -112,11 +117,13 @@
         box-shadow var(--transition-fast); 
 }
 
+.pantry-card__toggle:focus,
 .pantry-card__quantity-input:focus {
     outline: none;
     border-color: var(--color-primary);
 }
 
+.pantry-card__toggle:focus-visible,
 .pantry-card__quantity-input:focus-visible {
     outline: none;
 
@@ -301,12 +308,13 @@
 .pantry-card__action--add {
     grid-column: 1 / -1;
 
-    color: var(--color-text-on-accent);
-    background-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
     border-color: var(--color-primary);
 }
 
 .pantry-card__action--add:hover {
+    color: var(--color-text-on-accent);
     background-color: var(--color-primary-hover);
     border-color: var(--color-primary-hover);
 }
@@ -346,12 +354,13 @@
     width: 100%;
     margin-top: 0.75rem;
 
-    color: var(--color-text-on-accent);
-    background-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
     border-color: var(--color-primary);
 }
 
 .pantry-card__action--save:hover {
+    color: var(--color-text-on-accent);
     background-color: var(--color-primary-hover);
     border-color: var(--color-primary-hover);
 }

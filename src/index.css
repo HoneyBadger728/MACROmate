@@ -78,6 +78,7 @@ html {
   min-height: 100%;
 
   scroll-padding-bottom: 10rem;
+  scroll-behavior: smooth;
 
   background-color: var(--color-background);
 }
@@ -148,4 +149,12 @@ svg {
 ::selection {
   color: var(--color-text-primary);
   background-color: rgba(67, 196, 107 / .35);
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
