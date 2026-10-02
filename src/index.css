@@ -76,6 +76,9 @@
 html {
   min-width: 320px;
   min-height: 100%;
+
+  scroll-padding-bottom: 10rem;
+
   background-color: var(--color-background);
 }
 

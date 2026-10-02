@@ -25,7 +25,7 @@ function PantryPage() {
                         type="button" 
                         onClick={() => setIsAddFoodOpen(true)}
                     >
-                        Add Custom Food
+                        Custom Food
                     </button>
                 </div>
             </div>

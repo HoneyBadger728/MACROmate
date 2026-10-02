@@ -63,3 +63,14 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+
+@media (max-width: 340px) {
+    .pantry-page__header {
+        gap: 0.25rem;
+    }
+    
+    .pantry-page__actions {
+        gap: 0.15rem;
+    }
+}
