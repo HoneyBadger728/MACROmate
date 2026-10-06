@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editPantryItem, deletePantryItem } from "./pantrySlice";
 import  DeleteConfirmationModal  from "./DeleteConfirmationModal";
@@ -12,6 +12,7 @@ import "./PantryItemCard.css";
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
     const dispatch = useDispatch();
+    const caloriesInputRef = useRef(null);
     const formErrorId = `edit-food-error-${item.id}`;
 
     const [quantityGrams, setQuantityGrams] = useState(100);
@@ -37,6 +38,13 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
             setFormError("");
         }
     }, [isExpanded]);
+
+    useEffect(() => {
+        if (isEditing) {
+            caloriesInputRef.current?.focus();
+            caloriesInputRef.current?.select();
+        }
+    }, [isEditing])
 
     const quantityMultiplier = (Number(quantityGrams) || 0) / 100;
     
@@ -294,6 +302,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                 
                                 <span className="pantry-card__macro-control">
                                     <input
+                                    ref={caloriesInputRef}
                                     className="pantry-card__macro-input" 
                                     type="number"
                                     name="caloriesPer100g"

@@ -223,6 +223,8 @@
     transition: 
         border-color var(--transition-fast),
         box-shadow var(--transition-fast); 
+
+    scroll-margin-bottom: 4.75rem;
 }
 
 .pantry-card__macro-input:disabled {

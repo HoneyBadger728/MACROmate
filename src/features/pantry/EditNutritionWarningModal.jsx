@@ -1,12 +1,18 @@
+import { useRef } from "react";
 import Modal from "../../components/Modal";
 
+
+
 function EditNutritionWarningModal({itemName, affectedMealCount, onCancel, onContinue}) {
+   const cancelButtonRef = useRef(null); 
+    
     return (
         <Modal
             title="Edit Nutrition Information?"
             titleId="edit-nutrition-warning"
             descriptionId="edit-warning-description"
             onClose={onCancel}
+            initialFocusRef={cancelButtonRef}
         >
             <div id="edit-warning-description">
                 <p>
@@ -34,10 +40,12 @@ function EditNutritionWarningModal({itemName, affectedMealCount, onCancel, onCon
                     Continue Editing
                 </button>
 
-                <button 
+                <button
+                    ref={cancelButtonRef} 
                     className="modal__action modal__action--secondary"
                     type="button" 
                     onClick={onCancel}
+                    autoFocus
                 >
                     Cancel
                 </button> 

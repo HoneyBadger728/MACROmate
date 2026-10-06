@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./Modal.css"
 
-function Modal({title, titleId, descriptionId, onClose, children}) {
+function Modal({title, titleId, descriptionId, onClose, initialFocusRef, children}) {
     const dialogRef = useRef(null);
 
     useEffect(() => {
@@ -13,6 +13,8 @@ function Modal({title, titleId, descriptionId, onClose, children}) {
         }
 
         dialog.showModal();
+
+        initialFocusRef?.current?.focus()
 
         function handleKeyDown(event) {
             if (event.key === "Escape") {
