@@ -2,10 +2,11 @@ import GoalsForm from "../features/goals/GoalsForm";
 
 function GoalsPage() {
     return (
-        <main>  
-            <h2>Goals</h2>
+        <section className="home-page">  
+            <h1 className="home-page__title">MACROmate</h1>
+
             <GoalsForm />
-        </main>
+        </section>
     );
 }
 
