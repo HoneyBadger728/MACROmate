@@ -112,3 +112,8 @@
         0 0 0 1px var(--color-primary),
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }
+
+.add-food__macro-input::selection {
+    color: var(--color-surface-elevated);
+    background-color: var(--color-primary);
+}

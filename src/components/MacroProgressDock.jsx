@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectMealTotals } from "../features/meals/mealSelectors";
+import { formatCalories, formatMacro } from "../utils/formatNumbers";
 import "./MacroProgressDock.css";
 
 
@@ -12,28 +13,28 @@ function MacroProgressDock() {
             <p className="macro-dock__item macro-dock__item--calories">
                 <span className="macro-dock__label">Calories:</span> 
                 <span className="macro-dock__value">
-                    {totals.calories} / {goals.calories}
+                    {formatCalories(totals.calories)} / {goals.calories}
                 </span>
             </p>
 
             <p className="macro-dock__item macro-dock__item--protein">
                 <span className="macro-dock__label">Protein:</span> 
                 <span className="macro-dock__value">
-                    {totals.protein} / {goals.protein}
+                    {formatMacro(totals.protein)} / {goals.protein}
                 </span>
             </p>
 
             <p className="macro-dock__item macro-dock__item--carbs">
                 <span className="macro-dock__label">Carbs:</span> 
                 <span className="macro-dock__value">
-                    {totals.carbs} / {goals.carbs}
+                    {formatMacro(totals.carbs)} / {goals.carbs}
                 </span>
             </p>
 
             <p className="macro-dock__item macro-dock__item--fat">
                 <span className="macro-dock__label">Fat:</span> 
                 <span className="macro-dock__value">
-                    {totals.fat} / {goals.fat}
+                    {formatMacro(totals.fat)} / {goals.fat}
                 </span>
             </p>
         </section>

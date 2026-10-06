@@ -7,6 +7,7 @@ import { addMealEntry } from "../meals/mealEntriesSlice";
 import { selectRemainingMacros } from "../meals/mealSelectors";
 import { calculateMaximumWithinTargets } from "./pantrySelectors";
 import { normalizeFoodName } from "./pantryUtils";
+import { formatCalories, formatMacro, normalizeGrams, normalizeToOneDecimal } from "../../utils/formatNumbers";
 import "./PantryItemCard.css";
 
 function PantryItemCard({ item, isExpanded, onToggle }) {
@@ -73,6 +74,14 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         setQuantityGrams(
             value === "" ? "" : Number(value)
         );
+    }
+
+    function handleQuantityBlur() {
+        if (quantityGrams === "" || quantityGrams <= 0) {
+            return;
+        }
+
+        setQuantityGrams(normalizeGrams(quantityGrams));
     }
 
     function handleQuantityFocus() {
@@ -148,10 +157,10 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
             editPantryItem({
                 id: item.id,
                 name: editFood.name.trim(),
-                caloriesPer100g: Number(editFood.caloriesPer100g),
-                proteinPer100g: Number(editFood.proteinPer100g),
-                carbsPer100g: Number(editFood.carbsPer100g),
-                fatPer100g: Number(editFood.fatPer100g),
+                caloriesPer100g: Math.round(Number(editFood.caloriesPer100g)),
+                proteinPer100g: normalizeToOneDecimal(editFood.proteinPer100g),
+                carbsPer100g: normalizeToOneDecimal(editFood.carbsPer100g),
+                fatPer100g: normalizeToOneDecimal(editFood.fatPer100g),
             })
         );
 
@@ -176,19 +185,35 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         if (quantityGrams === "" || quantityGrams <= 0) {
             return;
         }
+
+         const normalizedQuantityGrams = normalizeGrams(quantityGrams);
         
         const mealEntry = {
             id,
             foodId: item.id,
-            quantityGrams,
+            quantityGrams: normalizedQuantityGrams,
         };
 
         dispatch(addMealEntry(mealEntry));
 
     }
 
+    const cardRef = useRef(null);
+
+    useEffect(() => {
+        if (isExpanded) {
+            cardRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+            });
+        }
+    }, [isExpanded])
+
     return (
-        <article className="pantry-card">
+        <article 
+            ref={cardRef}
+            className="pantry-card"
+        >
             <form className="pantry-card__form" onSubmit={handleSaveEditing}>
                 <div className="pantry-card__header">
                     {isEditing ? (
@@ -241,11 +266,12 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                             className="pantry-card__quantity-input" 
                             type="number"
                             min="0"
-                            step="any"
+                            step="0.1"
                             value={quantityGrams}
                             disabled={isEditing}
                             onChange={handleQuantityChange}
                             onFocus={handleQuantityFocus} 
+                            onBlur={handleQuantityBlur}
                         />
                         <span className="pantry-card__quantity-unit">{quantityUnit}</span>
                     </label>
@@ -308,9 +334,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                     name="caloriesPer100g"
                                     required
                                     min="0"
-                                    step="any"
+                                    step="1"
                                     value={
-                                        isEditing ? editFood.caloriesPer100g : displayedCalories
+                                        isEditing 
+                                            ? editFood.caloriesPer100g 
+                                            : formatCalories(displayedCalories)
                                     }
                                     disabled={!isEditing}
                                     onChange={handleEditChange} 
@@ -331,9 +359,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                         name="proteinPer100g"
                                         required
                                         min="0"
-                                        step="any"
+                                        step="0.1"
                                         value={
-                                            isEditing ? editFood.proteinPer100g : displayedProtein
+                                            isEditing 
+                                                ? editFood.proteinPer100g 
+                                                : formatMacro(displayedProtein)
                                         }
                                         disabled={!isEditing}
                                         onChange={handleEditChange} 
@@ -355,9 +385,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                         name="carbsPer100g"
                                         required
                                         min="0"
-                                        step="any"
+                                        step="0.1"
                                         value={
-                                            isEditing ? editFood.carbsPer100g : displayedCarbs
+                                            isEditing 
+                                                ? editFood.carbsPer100g 
+                                                : formatMacro(displayedCarbs)
                                         }
                                         disabled={!isEditing}
                                         onChange={handleEditChange} 
@@ -379,9 +411,11 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                         name="fatPer100g"
                                         required
                                         min="0"
-                                        step="any"
+                                        step="0.1"
                                         value={
-                                            isEditing ? editFood.fatPer100g : displayedFat
+                                            isEditing 
+                                                ? editFood.fatPer100g 
+                                                : formatMacro(displayedFat)
                                         }
                                         disabled={!isEditing}
                                         onChange={handleEditChange} 

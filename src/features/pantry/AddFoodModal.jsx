@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPantryItem } from "./pantrySlice";
 import { normalizeFoodName } from "./pantryUtils";
 import Modal from "../../components/Modal";
+import { normalizeToOneDecimal } from "../../utils/formatNumbers";
 import "./AddFoodModal.css"
 
 function createPantryItem(formData) {
@@ -13,10 +14,10 @@ function createPantryItem(formData) {
     return {
             id,
             name: formData.name.trim(),
-            caloriesPer100g: Number(formData.caloriesPer100g),
-            proteinPer100g: Number(formData.proteinPer100g),
-            carbsPer100g: Number(formData.carbsPer100g),
-            fatPer100g: Number(formData.fatPer100g),
+            caloriesPer100g: Math.round(Number(formData.caloriesPer100g)),
+            proteinPer100g: normalizeToOneDecimal(formData.proteinPer100g),
+            carbsPer100g: normalizeToOneDecimal(formData.carbsPer100g),
+            fatPer100g: normalizeToOneDecimal(formData.fatPer100g),
         };
 }
 
@@ -124,7 +125,7 @@ function AddFoodModal({ onClose }) {
                         name="caloriesPer100g"
                         required
                         min="0"
-                        step="any"
+                        step="1"
                         value={newFood.caloriesPer100g}
                         onChange={handleChange} 
                         />
@@ -141,7 +142,7 @@ function AddFoodModal({ onClose }) {
                         name="proteinPer100g"
                         required
                         min="0"
-                        step="any"
+                        step="0.1"
                         value={newFood.proteinPer100g}
                         onChange={handleChange} 
                         />
@@ -158,7 +159,7 @@ function AddFoodModal({ onClose }) {
                         name="carbsPer100g"
                         required
                         min="0"
-                        step="any"
+                        step="0.1"
                         value={newFood.carbsPer100g}
                         onChange={handleChange} 
                         />
@@ -175,7 +176,7 @@ function AddFoodModal({ onClose }) {
                         name="fatPer100g"
                         required
                         min="0"
-                        step="any"
+                        step="0.1"
                         value={newFood.fatPer100g}
                         onChange={handleChange} 
                         />

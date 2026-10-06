@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteMealEntry, editMealEntryQuantity } from "./mealEntriesSlice";
+import { formatCalories, formatMacro, normalizeGrams } from "../../utils/formatNumbers";
 import "./MealEntryCard.css";
 
 function MealEntryCard({ entry, food }) {
@@ -35,17 +36,20 @@ function MealEntryCard({ entry, food }) {
     }
 
     function handleSave() {
-        if (quantityGrams === "" || quantityGrams <=0) {
+        if (quantityGrams === "" || quantityGrams <= 0) {
             return;
         }
+
+        const normalizedQuantityGrams = normalizeGrams(quantityGrams);
 
         dispatch(
             editMealEntryQuantity({
                 id: entry.id,
-                quantityGrams: quantityGrams,
+                quantityGrams: normalizedQuantityGrams,
             })
         );
 
+        setQuantityGrams(normalizedQuantityGrams);
         setIsEditing(false);
     }
 
@@ -65,7 +69,7 @@ function MealEntryCard({ entry, food }) {
             
             <div className="meal-card__controls">
                 <label className="meal-card__quantity">
-                    <span className="meal-card__quantity-label">Quantity</span> 
+                    <span className="meal-card__quantity-label">Quantity:</span> 
                         
                         
                     <input
@@ -73,7 +77,7 @@ function MealEntryCard({ entry, food }) {
                         className="meal-card__quantity-input"
                         type="number"
                         min="0"
-                        step="any"
+                        step="0.1"
                         value={quantityGrams}
                         disabled={!isEditing}
                         onChange={handleQuantityChange}
@@ -115,26 +119,26 @@ function MealEntryCard({ entry, food }) {
             <div className="meal-card__macros">
                 <div className="meal-card__macro meal-card__macro--calories">
                     <span className="meal-card__macro-label">Calories</span>
-                    <span className="meal-card__macro-value">{calories}</span>
+                    <span className="meal-card__macro-value">{formatCalories(calories)}</span>
                 </div>
                 
                 <div className="meal-card__macro meal-card__macro--protein">
                     <span className="meal-card__macro-label">Protein</span>
-                    <span className="meal-card__macro-value">{protein}
+                    <span className="meal-card__macro-value">{formatMacro(protein)}
                         <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>
                 
                 <div className="meal-card__macro meal-card__macro--carbs">
                     <span className="meal-card__macro-label">Carbs</span>
-                    <span className="meal-card__macro-value">{carbs}
+                    <span className="meal-card__macro-value">{formatMacro(carbs)}
                         <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>
                 
                 <div className="meal-card__macro meal-card__macro--fat">
                     <span className="meal-card__macro-label">Fat</span>
-                    <span className="meal-card__macro-value">{fat}
+                    <span className="meal-card__macro-value">{formatMacro(fat)}
                         <span className="meal-card__macro-unit">{macroUnit}</span>
                     </span>
                 </div>

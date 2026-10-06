@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateGoals} from './goalsSlice';
+import { formatCalories, formatMacro } from '../../utils/formatNumbers';
 import './GoalsForm.css'
 
 function GoalsForm() {
@@ -40,8 +41,16 @@ function GoalsForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        
+        const normalizedGoals = {
+            calories: Math.round(formGoals.calories),
+            protein:  Math.round(formGoals.protein),
+            carbs:  Math.round(formGoals.carbs),
+            fat:  Math.round(formGoals.fat),
+        };
 
-        dispatch(updateGoals(formGoals));
+        dispatch(updateGoals(normalizedGoals));
+        setFormGoals(normalizedGoals)
         setIsEditing(false);
     }
 
@@ -98,7 +107,7 @@ function GoalsForm() {
                             type="number"
                             name="calories"
                             min="0"
-                            step="any"
+                            step="1"
                             required
                             placeholder='e.g. 2000'
                             value={formGoals.calories}
@@ -115,7 +124,7 @@ function GoalsForm() {
                                 type="number"
                                 name="protein"
                                 min="0"
-                                step="any"
+                                step="1"
                                 required
                                 placeholder='e.g. 200'
                                 value={formGoals.protein}
@@ -134,7 +143,7 @@ function GoalsForm() {
                                 type="number"
                                 name="carbs"
                                 min="0"
-                                step="any"
+                                step="1"
                                 required
                                 placeholder='e.g. 75'
                                 value={formGoals.carbs}
@@ -153,7 +162,7 @@ function GoalsForm() {
                                 type="number"
                                 name="fat"
                                 min="0"
-                                step="any"
+                                step="1"
                                 required
                                 placeholder='e.g. 40'
                                 value={formGoals.fat}
