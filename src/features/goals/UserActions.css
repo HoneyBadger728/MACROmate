@@ -1,0 +1,76 @@
+
+
+.user-actions {
+    margin-top: 0.75rem;
+    padding: 1rem;
+
+    background-color: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-small);
+}
+
+.user-actions__title {
+    margin-bottom: 1rem;
+}
+
+.user-actions__buttons {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.user-actions__button {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+
+    color: var(--color-text-secondary);
+    background-color: transparent;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    font-size: var(--font-size-small);
+    letter-spacing: 0.045rem;
+    font-weight: 700;
+
+    transition: 
+        color var(--transition-fast),
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.user-actions__button:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 
+        0 0 0 1px var(--color-primary),
+        0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
+}
+
+.user-actions__button--clear {
+    color: var(--color-warning);
+    border-color: var(--color-warning);
+}
+
+.user-actions__button--clear:hover {
+    color: var(--color-text-primary);
+    background-color: hsl(from var(--color-warning) h s l / 0.15);
+}
+
+.user-actions__button--clear:active {
+    background-color: hsl(from var(--color-warning) h s l / 0.25);
+}
+
+.user-actions__button--reset {
+    color: hsl(from var(--color-danger) h s l / 0.6);
+    border-color: hsl(from var(--color-danger) h s l / 0.6);
+}
+
+.user-actions__button--reset:hover {
+    color: var(--color-text-primary);
+    background-color: hsl(from var(--color-danger) h s l / 0.15);
+}
+
+.user-actions__button--reset:active {
+    background-color: hsl(from var(--color-danger) h s l / 0.25);
+}
+

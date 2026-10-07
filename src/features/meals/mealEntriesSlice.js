@@ -27,9 +27,11 @@ const mealEntriesSlice = createSlice({
                 existingEntry.quantityGrams = updatedEntry.quantityGrams;
             }
         },
+
+        clearMealEntries: () => initialState,
     },
 });
 
-export const { addMealEntry, deleteMealEntry, editMealEntryQuantity} = mealEntriesSlice.actions;
+export const { addMealEntry, deleteMealEntry, editMealEntryQuantity, clearMealEntries} = mealEntriesSlice.actions;
 
 export default mealEntriesSlice.reducer;

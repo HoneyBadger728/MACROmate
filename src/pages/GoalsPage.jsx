@@ -1,5 +1,6 @@
 import GoalsForm from "../features/goals/GoalsForm";
 import MacroProgress from "../features/goals/MacroProgress";
+import UserActions from "../features/goals/UserActions";
 import "./GoalsPage.css"
 
 function GoalsPage() {
@@ -9,6 +10,7 @@ function GoalsPage() {
 
             <GoalsForm />
             <MacroProgress />
+            <UserActions />
         </section>
     );
 }

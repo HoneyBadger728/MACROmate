@@ -1,17 +1,29 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import goalsReducer from '../features/goals/goalsSlice';
 import pantryReducer from '../features/pantry/pantrySlice';
 import mealEntriesReducer from '../features/meals/mealEntriesSlice'
 import { saveState, loadState } from './localStorage';
 
+
+
+const appReducer = combineReducers({
+  goals: goalsReducer,
+  pantry: pantryReducer,
+  mealEntries: mealEntriesReducer,
+});
+
+const rootReducer = (state, action) => {
+  if (action.type === "app/reset") {
+    return appReducer(undefined, action);
+  }
+
+  return appReducer(state, action)
+}
+
 const persistedState = loadState();
 
 export const store = configureStore({
-  reducer: {
-    goals: goalsReducer,
-    pantry: pantryReducer,
-    mealEntries: mealEntriesReducer,
-  },
+  reducer: rootReducer,
   preloadedState: persistedState,
 });
 

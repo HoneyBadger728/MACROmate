@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateGoals} from './goalsSlice';
-import { formatCalories, formatMacro } from '../../utils/formatNumbers';
 import './GoalsForm.css'
 
 function GoalsForm() {
@@ -26,6 +25,18 @@ function GoalsForm() {
             caloriesInputRef.current?.select()
         }
     }, [isEditing])
+
+    useEffect(() => {
+        if (!goals.isConfigured) {
+            setFormGoals({
+                calories: "",
+                protein: "",
+                carbs: "",
+                fat: "",
+            });
+            setIsEditing(false)
+        }
+    }, [goals.isConfigured]);
     
    
     const inputsDisabled = goals.isConfigured && !isEditing;

@@ -110,6 +110,8 @@
     padding: 0.25rem .375rem;
 
     color: var(--color-text-primary);
+    letter-spacing: 0.02rem;
+
     background-color: var(--color-surface-elevated);
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-small);
@@ -117,6 +119,11 @@
     transition: 
         border-color var(--transition-fast),
         box-shadow var(--transition-fast);
+}
+
+.pantry-card__quantity-input::selection {
+    color: var(--color-surface-elevated);
+    background-color: var(--color-primary);
 }
 
 .pantry-card__toggle:focus,
