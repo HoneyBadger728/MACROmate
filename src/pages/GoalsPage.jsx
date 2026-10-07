@@ -1,4 +1,6 @@
 import GoalsForm from "../features/goals/GoalsForm";
+import MacroProgress from "../features/goals/MacroProgress";
+import "./GoalsPage.css"
 
 function GoalsPage() {
     return (
@@ -6,6 +8,7 @@ function GoalsPage() {
             <h1 className="home-page__title">MACROmate</h1>
 
             <GoalsForm />
+            <MacroProgress />
         </section>
     );
 }

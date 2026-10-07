@@ -1,0 +1,70 @@
+
+
+.macro-progress {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background-color: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-small);
+}
+
+.macro-progress__title {
+    margin-bottom: 1rem;
+}
+
+.macro-progress__items {
+    display: grid;
+    gap: 1rem;
+}
+
+.macro-progress__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.macro-progress__label {
+    font-weight: 600;
+}
+
+.macro-progress__status {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    padding-right: 0.5rem;
+}
+
+.macro-progress__status--over {
+    color: var(--color-warning);
+    font-weight: 600;
+}
+
+.macro-progress__track {
+    height: 0.5rem;
+    overflow: hidden;
+    background-color: var(--color-surface-elevated);
+    border-radius: var(--radius-pill);
+}
+
+.macro-progress__fill {
+    height: 100%;
+    border-radius: inherit;
+}
+
+.macro-progress__fill--calories {
+    background-color: var(--color-calories);
+}
+
+.macro-progress__fill--protein {
+    background-color: var(--color-protein);
+}
+
+.macro-progress__fill--carbs {
+    background-color: var(--color-carbs);
+}
+
+.macro-progress__fill--fat {
+    background-color: var(--color-fat);
+}
