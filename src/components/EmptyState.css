@@ -1,0 +1,32 @@
+
+
+.empty-state {
+    margin-top: 1rem;
+    padding: 2rem 1rem;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-medium);
+
+    text-align: center;
+}
+
+.empty-state__icon {
+    display: block;
+    margin: 0 auto 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.empty-state__title {
+    margin: 0 0 0.75rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.empty-state__description {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    line-height: 1.75;
+}

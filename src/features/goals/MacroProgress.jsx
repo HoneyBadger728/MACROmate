@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectMealTotals } from "../meals/mealSelectors";
 import { formatCalories, formatMacro } from "../../utils/formatNumbers";
+import { ChartNoAxesColumn } from "lucide-react";
 import "./MacroProgress.css"
 
 function MacroProgress() {
@@ -44,59 +45,69 @@ function MacroProgress() {
         }
     ]
 
-    if (!goals.isConfigured) {
-        return null;
-    }
-
     return (
         <section className="macro-progress">
             <h2 className="macro-progress__title">
                 Today's Progress
             </h2>
-            
-            <div className="macro-progress__items">
-                {macroProgress.map((macro) => {
-                    const remaining = macro.goal - macro.total;
 
-                    const progress = macro.goal > 0 
-                        ? Math.min((macro.total / macro.goal) * 100, 100) 
-                        : 0;
+            {!goals.isConfigured ? (
+                <div className="macro-progress__empty">
+                   <ChartNoAxesColumn 
+                        className="macro-progress__empty-icon"
+                    />
 
-                    const isOver = remaining < 0;
+                    <p>
+                        Set your Daily Goals to see how your entered meals
+                        align with your targets.  
+                    </p> 
+                </div>
+                
+            ) : (
+                <div className="macro-progress__items">
+                    {macroProgress.map((macro) => {
+                        const remaining = macro.goal - macro.total;
 
-                    return (
-                        <div 
-                            className="macro-progress__item"
-                            key={macro.key}
-                        >
-                            <div className="macro-progress__header">
-                                <span className="macro-progress__label">
-                                    {macro.label}
-                                </span>
+                        const progress = macro.goal > 0 
+                            ? Math.min((macro.total / macro.goal) * 100, 100) 
+                            : 0;
 
-                                <span 
-                                    className={`macro-progress__status${
-                                        isOver
-                                            ? " macro-progress__status--over"
-                                            : ""
-                                    }`}
-                                >
-                                    {macro.formatter(Math.abs(remaining))}
-                                    {macro.unit} {isOver ? "over" : "remaining"}
-                                </span>
-                            </div>
+                        const isOver = remaining < 0;
 
-                      
-                            <div className="macro-progress__track">
-                                <div
-                                    className={`macro-progress__fill macro-progress__fill--${macro.key}`}
-                                    style={{ width: `${progress}%` }}
-                                />
-                            </div>
-                        </div>  
-                    );
-                })}
-            </div>
+                        return (
+                            <div 
+                                className="macro-progress__item"
+                                key={macro.key}
+                            >
+                                <div className="macro-progress__header">
+                                    <span className="macro-progress__label">
+                                        {macro.label}
+                                    </span>
+
+                                    <span 
+                                        className={`macro-progress__status${
+                                            isOver
+                                                ? " macro-progress__status--over"
+                                                : ""
+                                        }`}
+                                    >
+                                        {macro.formatter(Math.abs(remaining))}
+                                        {macro.unit} {isOver ? "over" : "remaining"}
+                                    </span>
+                                </div>
+
+                        
+                                <div className="macro-progress__track">
+                                    <div
+                                        className={`macro-progress__fill macro-progress__fill--${macro.key}`}
+                                        style={{ width: `${progress}%` }}
+                                    />
+                                </div>
+                            </div>  
+                        );
+                    })}
+                </div>
+            )}
         </section>
     );
 }

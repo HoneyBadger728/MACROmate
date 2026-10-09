@@ -123,7 +123,7 @@ function GoalsForm() {
                             min="0"
                             step="1"
                             required
-                            placeholder='e.g. 2000'
+                            placeholder='"2000"'
                             value={formGoals.calories}
                             disabled={inputsDisabled}
                             onChange={handleChange}
@@ -140,7 +140,7 @@ function GoalsForm() {
                                 min="0"
                                 step="1"
                                 required
-                                placeholder='e.g. 200'
+                                placeholder='"200"'
                                 value={formGoals.protein}
                                 disabled={inputsDisabled}
                                 onChange={handleChange}
@@ -159,7 +159,7 @@ function GoalsForm() {
                                 min="0"
                                 step="1"
                                 required
-                                placeholder='e.g. 75'
+                                placeholder='"75"'
                                 value={formGoals.carbs}
                                 disabled={inputsDisabled}
                                 onChange={handleChange}
@@ -178,7 +178,7 @@ function GoalsForm() {
                                 min="0"
                                 step="1"
                                 required
-                                placeholder='e.g. 40'
+                                placeholder='"40"'
                                 value={formGoals.fat}
                                 disabled={inputsDisabled}
                                 onChange={handleChange}

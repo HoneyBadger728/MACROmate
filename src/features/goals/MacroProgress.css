@@ -9,6 +9,20 @@
     box-shadow: var(--shadow-small);
 }
 
+.macro-progress__empty {
+    padding: 1rem 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+    text-align: center;
+}
+
+.macro-progress__empty-icon {
+    display: block;
+    margin: 0 auto 0.75rem;
+    color: var(--color-text-muted);
+}
+
 .macro-progress__title {
     margin-bottom: 1rem;
 }
