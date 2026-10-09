@@ -13,7 +13,6 @@ import "./PantryItemCard.css";
 function PantryItemCard({ item, isExpanded, onToggle }) {
     
     const dispatch = useDispatch();
-    const caloriesInputRef = useRef(null);
     const formErrorId = `edit-food-error-${item.id}`;
 
     const [quantityGrams, setQuantityGrams] = useState(100);
@@ -40,10 +39,21 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         }
     }, [isExpanded]);
 
+    const caloriesInputRef = useRef(null);
+    const editFoodButtonRef = useRef(null);
+    const shouldRestoreFocus = useRef(false);
+
     useEffect(() => {
         if (isEditing) {
             caloriesInputRef.current?.focus();
             caloriesInputRef.current?.select();
+        }
+    }, [isEditing])
+
+    useEffect(() => {
+        if (!isEditing && shouldRestoreFocus.current) {
+            editFoodButtonRef.current?.focus();
+            shouldRestoreFocus.current = false;
         }
     }, [isEditing])
 
@@ -163,7 +173,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                 fatPer100g: normalizeToOneDecimal(editFood.fatPer100g),
             })
         );
-
+        shouldRestoreFocus.current = true;
         setIsEditing(false);
     }
 
@@ -441,7 +451,8 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                                     Add to Today's Meals
                                 </button>
 
-                                <button 
+                                <button
+                                    ref={editFoodButtonRef} 
                                     className="pantry-card__action pantry-card__action--edit"
                                     type="button" 
                                     onClick={handleStartEditing}

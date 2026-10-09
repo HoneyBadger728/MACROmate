@@ -18,6 +18,8 @@ function GoalsForm() {
     });
 
     const caloriesInputRef = useRef(null);
+    const updateGoalsButtonRef = useRef(null);
+    const shouldRestoreFocusRef = useRef(false);
 
     useEffect(() => {
         if (isEditing) {
@@ -37,6 +39,13 @@ function GoalsForm() {
             setIsEditing(false)
         }
     }, [goals.isConfigured]);
+
+    useEffect(() => {
+        if (!isEditing && shouldRestoreFocusRef.current) {
+            updateGoalsButtonRef.current?.focus();
+            shouldRestoreFocusRef.current = false;
+        }
+    }, [isEditing])
     
    
     const inputsDisabled = goals.isConfigured && !isEditing;
@@ -62,6 +71,7 @@ function GoalsForm() {
 
         dispatch(updateGoals(normalizedGoals));
         setFormGoals(normalizedGoals)
+        shouldRestoreFocusRef.current = goals.isConfigured;
         setIsEditing(false);
     }
 
@@ -85,23 +95,16 @@ function GoalsForm() {
                 
                 {goals.isConfigured && !isEditing && (
                     <button
-                            className='goals__action goals__action--edit' 
-                            type='button'
-                            onClick={handleStartEditing}
+                        ref={updateGoalsButtonRef}    
+                        className='goals__action goals__action--edit' 
+                        type='button'
+                        onClick={handleStartEditing}
                     >
                         Update Goals
                     </button> 
                 )}
 
-                {(!goals.isConfigured || isEditing) && (
-                    <button 
-                        className='goals__action goals__action--save'
-                        type='submit'
-                        form='goals__form'
-                    >
-                        {goals.isConfigured ? "Save Changes" : "Set Goals"}
-                    </button>
-                )}
+               
             </div>
 
             <form 
@@ -184,7 +187,15 @@ function GoalsForm() {
                         </div>
                     </label>
                 </div>
-
+                
+                {(!goals.isConfigured || isEditing) && (
+                    <button 
+                        className='goals__action goals__action--save'
+                        type='submit'
+                    >
+                        {goals.isConfigured ? "Save Changes" : "Set Goals"}
+                    </button>
+                )}
                
             </form>
 
