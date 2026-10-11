@@ -93,6 +93,28 @@ Approved
 
 ---
 
+### Pantry References and Derived Nutrition Data
+
+Decision: 
+- Meal entries reference stored pantry items instead of storing independent copies of nutritional data.
+- Each meal entry stores its own quantity in grams.
+- Nutritional contributions to daily totals are calculated based on the referenced Pantry item's per-100g nutritional values and the entry's quantity.
+
+Reasoning: 
+- This allows a single source of truth for a given item's nutritional values. 
+- Ensures that changes to a pantry item's nutritional values will be reflected in any meal entry calculations. 
+- Prevents duplication of nutritional data which reduces the risk of inconsistencies. 
+- Allows a given Pantry item to have multiple meal entries with unique quantities.
+
+Implementation Considerations:
+- Pantry items can't be deleted from the app if they are currently referenced in a meal entry.
+- Changing the data of a pantry item that is currently referenced in a meal entry requires user acknowledgment as it will alter current daily totals.
+
+Status:
+Implemented 
+
+---
+
 ### Macro Goal Structure
 
 Decision:
@@ -120,13 +142,13 @@ Future Considerations:
             
 
 Status: 
-- Approved
+Approved
 
 ---
 
 ## UI Decisions
 
-### Goal Summary Footer
+### Goal Summary Footer --> MacroProgressDock
 
 Decision: 
 - GoalsSummary from GoalsPage will be used as the basis of a footer for PantryPage and MealEntriesPage.
@@ -134,8 +156,18 @@ Decision:
 Reasoning:
 - GoalsSummary would only need to be built once and could be augmented and reused as needed. 
 
+Implementation Update:
+- The original footer evolved into a dedicated component - MacroProgressDock
+- MacroProgressDock is displayed above the bottom navigation and persists across the application's primary pages.
+- The dock displays current planned calorie and macro totals, progress toward user-configured goals, and remaining allowances.   
+
+Reasoning for Revision:
+- Users benefit from seeing current totals across all pages of the application.
+- A shared component that updates instantly allows for better UI consistency and user workflow.  
+- The dock supports MACROmate's mobile-first design tenet. 
+
 Status:
-Approved
+Implemented - revised from original decision
 
 ---
 
@@ -147,8 +179,13 @@ Decision:
 Reason:
 - Storing and rendering food items at the specified amount will keep calculations consistent and allow the user to preview realistic amounts of a given item with a set point of reference. 
 
+Implementation Clarification:
+- Pantry items store nutritional data per 100g and allows users to preview nutritional contributions at user-specified quantities.
+- Changing a pantry item's preview quantity from the default 100g will recalculate the displayed nutritional values without modifying stored item per-100g values.
+- The specified quantity can then be added to Today's Meals, which instantly updates the `MacroProgressDock` component.    
+
 Status:
-Approved
+Implemented as originally intended. 
 
 ---
 
@@ -162,10 +199,13 @@ Decision:
 Reasoning:
 - Reflects workflow usage from left to right. 
 - Reinforces MACROmate branding by making the logo centralized and a primary means of navigation.
-- Aligns with common industry practice of making the app logo a navigation link to the landing page.  
+- Aligns with common industry practice of making the app logo a navigation link to the landing page.
+
+Implementation Clarification:
+- Navigation controls are fixed to the bottom of the MACROmate app which reinforces consistent behavior for user workflow and mobile-first design. 
 
 Status:
-Approved
+Implemented as originally intended. 
 
 ---
 
