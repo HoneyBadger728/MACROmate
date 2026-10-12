@@ -209,7 +209,7 @@ Implemented as originally intended.
 
 ---
 
-## Open Questions
+## Resolved Design Decisions
 
 ### Editing Meal Entries
 
@@ -217,8 +217,17 @@ Question:
 - Should users edit meal quantities directly?
 - Or should items be removed and re-added?
 
+Resolution:
+- Users can edit meal quantities directly within the Today's Meals page without needing to remove and then re-add items.
+
+Reasoning:
+- Reduces unnecessary steps to adjust planned intake. 
+- Preserves existing entries and allows users to experiment with different quantities. 
+- Supports MACROmate's planning-first approach by making workflow convenient and non-restrictive.
+- Users can see the daily totals and allowances change instantly after saving an adjusted meal quantity. 
+
 Status: 
-- Deferred until implementation
+Resolved - Implemented
 
 ---
 
@@ -244,11 +253,20 @@ Reasoning:
 Benefits:
 - Preserves planning intent
 - Supports future organization features
-- More accurately reflects real-world usage 
+- More accurately reflects real-world usage
+
+Resolution:
+- Each added pantry item creates a separate meal entry instead of combining them. 
+- Each meal entry stores its own quantity and can be edited or removed independently.
+
+Resolution Reasoning:
+- Preserves the user's intention when planning future meals or portions. 
+- Allows quantities to be adjusted individually.
+- Supports potential future features like meal grouping without needing to redesign storage architecture.
 
 
 Status:
-- Under consideration and deferred until Redux state planning.
+Resolved - Implemented
 
 ---
 
@@ -263,7 +281,7 @@ Reason:
 - Outside MVP scope.
 
 Revisit:
-- After meal-entry implementation.
+- After MVP 1.0 and initial user feedback.
 
 ---
 
