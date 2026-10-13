@@ -414,8 +414,27 @@ Need to show:
 
 Consider adding fixed totals bar to both My Pantry and Today's Meals
 
+### Wireframe Discoveries - Update & Disposition
+
+Implementation Update:
+- The home page displays current nutritional goals, progress bars, and remaining nutritional allowances based on user-configured targets.
+- Today's Meals displays nutritional information for individual entries, while the persistent MacroProgressDock component displays cumulative planned totals against configured targets. 
+- The original suggestion for a fixed totals bar evolved into MacroProgressDock, which remains visible across the primary application pages.
+- As MACROmate is designed as a planning-first application, nutritional totals represent planned intake rather than confirmed consumption. 
+
+Status:
+Implemented - Original wireframe observation requirements addressed through revised component architecture.
+
 ## Future Enhancements
 
 - Nutrition API
 - Progress charts
 - PWA support
+
+Implementation Update:
+- Nutrition API: Reclassified as an MVP 1.0 requirement. The planned Find Foods feature will integrate an external nutritional data source so that users can search for items to add to My Pantry. Implementation is pending. 
+- Progress Charts: Deferred - Post-MVP. MACROmate currently displays progress bars on the Home page. More advanced charts, particularly those involving historical data, remain potential future enhancements. 
+- PWA Support: Deferred - Post-MVP. Progressive Web App functionality is not required for the initial MVP 1.0 release. 
+
+Status:
+Future enhancements reviewed and updated to reflect current MVP 1.0 scope.
