@@ -262,7 +262,7 @@ Resolution:
 Resolution Reasoning:
 - Preserves the user's intention when planning future meals or portions. 
 - Allows quantities to be adjusted individually.
-- Supports potential future features like meal grouping without needing to redesign storage architecture.
+- Supports future potential future features like meal grouping without needing to redesign storage architecture.
 
 
 Status:
@@ -281,7 +281,17 @@ Reason:
 - Outside MVP scope.
 
 Revisit:
-- After MVP 1.0 and initial user feedback.
+- After meal-entry implementation.
+
+Implementation Status:
+- Meal entries currently exist as individual entries without category grouping. 
+- The decision to preserve each entry independently supports the implementation of category grouping in future updates. 
+
+Updated Revisit:
+- After MVP 1.0 and initial user feedback
+
+Status:
+Deferred - Post-MVP
 
 ---
 
@@ -296,6 +306,14 @@ Reason:
 
 Revisit:
 - After implementation of MVP.
+
+Reasoning for Rejection:
+- Current MACROmate architecture allows users to plan meals using individually stored quantities of items.
+- The ability to add individual quantities already addresses the proposed functionality. 
+- The limited convienience of implementing this feature does not justify adding interface complexity or greatly improve user workflow.   
+
+Status:
+Rejected - Redundant
 
 ---
 
@@ -315,8 +333,20 @@ Reason:
 - A global status would add complexity without improving functionality and is outside the scope of MVP.
 
 Revisit:
-- After MVP completion
-- User testing 
+- After MVP 1.0 release and initial feedback from user testing 
+
+Implementation Status:
+- The currently implemented MacroProgressDock (formerly MacroProgressFooter) persistently displays planned nutritional goals, progress toward configured goals, and remaining allowances.
+- A separate global status message displaying overall goal completion has not been implemented.
+
+Reasoning for Continued Deferral:
+- The existing MacroProgressDock provides users the numerical feedback necessary to interpret progress toward set goals.
+- An additional global component displaying status messaging could improve clarity but may introduce unnecessary visual clutter.
+- The usefulness of this feature should be evaluated through user feedback.
+- If user feedback indicates a need for status messaging, implementation within the Home page could be considered as an alternative to a persistent footer.
+
+Status:
+Deferred - Post-MVP
 
 ---
 
@@ -331,10 +361,10 @@ Example:
     Fixed Progress 2 - Current Calories: 1950 (Calorie goal not met)
 
     Flex Goal - Calorie Goal: 2000 Flex Calories: 200
-    Flex Progress 1 - Current Calories: 2050 (Calorie goal met - flex goal not exceeded)
+    Flex Progress 1 - Current Calories: 2050 (Calorie goal met and exceeded - flex goal not exceeded)
     Flex Progress 2 - Current Calories: 1950 (Calorie goal met - flex goal not exceeded)
     Flex Progress 3 - Current Calories: 1750 (Calorie goal not met)
-    Flex Progress 4 - Current Calories: 2250 (Calorie goal met - flex goal exceeded)
+    Flex Progress 4 - Current Calories: 2250 (Calorie goal met and exceeded - flex goal exceeded)
 
 Reason:
 - Users can implement discretion when going over set calorie limits.
@@ -342,12 +372,29 @@ Reason:
 - Outside the scope of MVP.  
 
 Future Considerations:
-- Adding flex calories would prevent frustration with having to dial-in exact macros to meet a rigid goal.
-- A flex calorie budget would allow MACROmate to suggest item quantity up to the limit afforded by the flex calorie budget 
+- A configurable tolerance range could allow MACROmate to recognize calorie goals as met without requiring users to meet an exact numerical value.  
+- Configurable nutritional tolerances could reduce frustration with having to dial-in exact macros to meet rigid goals.
+- A separate "Maximum Within Flex Allowance" calculation could provide additional quantity guidance based on nutritional tolerances, while preserving the current Maximum Within Targets calculation.  
+- If MACROmate implements historical nutritional tracking and goal-completion evaluation, configurable tolerances for all user-set targets should be considered to provide consistent and meaningful assessments across all nutritional goals. 
+- As a simpler alternative to user-configured tolerances, a future goal-status component could apply a predefined tolerance (e.g. ±5%) when evaluating if a user has met their configured goals. This tolerance would only apply exclusively to status messaging and would not modify or affect configured goals, current calculations, or planning guidance.      
 
 Revisit:
-- After MVP release
-- User testing 
+- After MVP 1.0 release and gathering feedback from user testing 
+
+Implementation Status:
+- MACROmate currently uses fixed calorie and macronutrient targets.
+- Users can plan meals that exceed their configured targets, with the application providing feedback on exceeded targets and remaining allowances.
+- Maximum Within Targets calculates and displays allowable item quantities based on the fixed goals without an additional flexibility allowance.
+
+Reasoning for Continued Deferral:
+- MACROmate's current architecture gives users the freedom to exercise discretion when exceeding configured targets. 
+- Flexible nutritional targets could provide more personalized feedback and nutritional guidance but would require additional user configuration and added calculation complexity.
+- The interaction between supporting flexible nutritional tolerances, goal-completion feedback, and Maximum Within Targets requires further consideration.
+- Initial user feedback should be evaluated to determine the usefulness of this feature.
+- Future implementation of historical daily meal data could increase the value of flexible targets by allowing users to evaluate goal completion over time.   
+
+Status:
+Deferred - Post-MVP
 
 ---
 
