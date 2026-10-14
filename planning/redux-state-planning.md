@@ -163,7 +163,7 @@ Approved
 ### Pantry Item Editing
 
 Decision:
-- Pantry items that exist in Today's Meals requires user acknowledgement before saving changes.
+- Pantry items that exist in Today's Meals require user acknowledgement before editing.
 
 Reasoning:
 - To support above decision that meals reference current pantry items.
@@ -186,7 +186,7 @@ Approved
 
 ---
 
-### Maximum Within Tagets - Edge Cases
+### Maximum Within Targets - Edge Cases
 
 Decision:
 - Macros with a value of 0 will not be used to calculate an item's max quantity within set target.
@@ -229,7 +229,7 @@ Approved
 
 ---
 
-## Proposed State Structure
+## Original Proposed State Structure
 ```js
 {
 
@@ -261,7 +261,31 @@ Approved
 }
 ```
 
-## Proposed Redux Slices
+---
+
+## Implemented State Structure
+```js
+{
+    goals: {
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fat: 0,
+        isConfigured: false
+    },
+
+    pantry: [],
+
+    mealEntries: []
+
+}
+```
+
+The isConfigured property distinguishes unconfigured goals from goals assigned a value of zero. When saved application data is available, the store initializes from that data rather than the default values.   
+
+---
+
+## Original Proposed Redux Slices
 
 ### goalsSlice
 
@@ -306,3 +330,80 @@ Responsibilities:
 
 ---
 
+## Implemented Redux Slices
+
+### goalsSlice
+
+Stores:
+- Calorie, protein, carbohydrate, and fat goals
+- isConfigured status
+
+Actions:
+- updateGoals - Updates all four goals together and sets isConfigured to true.
+
+---
+
+### pantrySlice
+
+Stores:
+- Pantry items and their corresponding nutrition information per 100g
+
+Actions:
+- addPantryItem - Add a Pantry item.
+- editPantryItem - Updates an existing Pantry item's name and nutritional information. 
+- deletePantryItem - Removes a Pantry item by ID. 
+
+The restriction against deleting Pantry items currently referenced by meal entries is enforced by current UI architecture, rather than the reducer.  
+
+---
+
+### mealEntriesSlice
+
+Stores:
+- Meal entries containing an ID, Pantry food ID, and quantity in grams
+
+Actions:
+- addMealEntry - Adds an independent meal entry. 
+- editMealEntryQuantity - Updates the quantity of an existing meal entry. 
+- deleteMealEntry - Removes an individual meal entry.
+- clearMealEntries - Removes all meal entries without changing Pantry items or goals. 
+
+---
+
+### Application-Level Reset
+
+The root reducer handles the app/reset action, restoring all three Redux slices to their initial states. 
+
+---
+
+## Implemented Derived State
+
+Nutritional totals, remaining targets, and Pantry guidance are calculated from the Redux state rather than stored independently.
+
+### Meal Totals
+
+- selectMealTotals calculates total calories, protein, carbohydrates, and fat from meal entries and their referenced Pantry items.
+- Nutritional values are scaled according to each entries quantity in grams. 
+- Entries refencing missing Pantry items are excluded from the totals. 
+
+---
+
+### Remaining Targets
+
+
+
+---
+
+### Pantry Guidance
+
+
+
+---
+
+### Goal Progress
+
+
+
+---
+
+## State Persistence
