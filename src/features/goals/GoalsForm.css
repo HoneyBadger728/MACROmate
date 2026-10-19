@@ -137,6 +137,7 @@
 }
 
 .goals__input:disabled {
+    appearance: textfield;
     field-sizing: content;
     width: auto;
     padding: 0;
@@ -144,6 +145,12 @@
     background-color: transparent;
     border-color: transparent;
     opacity: 1;
+}
+
+.goals__input:disabled::-webkit-inner-spin-button,
+.goals__input:disabled::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .goals__input:not(:disabled):focus {
