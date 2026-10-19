@@ -43,8 +43,6 @@
 - Goals Met
 - Goals Exceeded
 
-## Open Questions
-
 
 ## Major Decisions
 
@@ -205,6 +203,7 @@ Approved
 
 ---
 
+
 ## Technical Decisions
 
 ### UI State Management
@@ -228,6 +227,7 @@ Status:
 Approved
 
 ---
+
 
 ## Original Proposed State Structure
 ```js
@@ -263,6 +263,7 @@ Approved
 
 ---
 
+
 ## Implemented State Structure
 ```js
 {
@@ -284,6 +285,7 @@ Approved
 The isConfigured property distinguishes unconfigured goals from goals assigned a value of zero. When saved application data is available, the store initializes from that data rather than the default values.   
 
 ---
+
 
 ## Original Proposed Redux Slices
 
@@ -330,6 +332,7 @@ Responsibilities:
 
 ---
 
+
 ## Implemented Redux Slices
 
 ### goalsSlice
@@ -349,7 +352,7 @@ Stores:
 - Pantry items and their corresponding nutrition information per 100g
 
 Actions:
-- addPantryItem - Add a Pantry item.
+- addPantryItem - Adds a Pantry item.
 - editPantryItem - Updates an existing Pantry item's name and nutritional information. 
 - deletePantryItem - Removes a Pantry item by ID. 
 
@@ -376,6 +379,7 @@ The root reducer handles the app/reset action, restoring all three Redux slices 
 
 ---
 
+
 ## Implemented Derived State
 
 Nutritional totals, remaining targets, and Pantry guidance are calculated from the Redux state rather than stored independently.
@@ -383,27 +387,41 @@ Nutritional totals, remaining targets, and Pantry guidance are calculated from t
 ### Meal Totals
 
 - selectMealTotals calculates total calories, protein, carbohydrates, and fat from meal entries and their referenced Pantry items.
-- Nutritional values are scaled according to each entries quantity in grams. 
-- Entries refencing missing Pantry items are excluded from the totals. 
+- Nutritional values are scaled according to each entrie's quantity in grams. 
+- Entries referencing missing Pantry items are excluded from the totals. 
 
 ---
 
 ### Remaining Targets
 
-
+- selectRemainingMacros subtracts meal totals from the configured goals.
+- Remaining values may be negative when targets are exceeded. 
 
 ---
 
 ### Pantry Guidance
 
-
+- calculateMaximumWithinTargets calculates the maximum quantity of each pantry item that fits within all applicable remaining daily targets.
+- Returns maxGrams and limitingFactors.
+- Returns maxGrams: null when no nutrient-based constraints apply. 
 
 ---
 
 ### Goal Progress
 
-
+- MacroProgress derives remaining amounts and exceeded-target status from meal totals and goals.
+- Progress bars are capped at 100%, while exceeded targets are identified separately. 
+- MacroProgressDock displays running totals alongside their corresponding goals. 
 
 ---
 
+
 ## State Persistence
+
+- loadState() retrieves saved state when the application initializes.
+- saveState() serializes and saves the current goals, pantry, and mealEntries state.
+- The Redux store subscribes to state changes to keep the saved data updated.
+- If saved data is unavailable or cannot be parsed, the application initializes to the default initial state.
+- Read and write errors are logged without interrupting the application. 
+
+The persistence implementation does not currently validate the structure of successfully parsed saved data.
