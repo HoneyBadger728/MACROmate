@@ -1,6 +1,6 @@
 import { normalizeUsdaFood } from "./normalizeUsdaFood";
 
-export async function searchUsdaFoods(query) {
+export async function searchUsdaFoods(query, signal) {
     const url = new URL(
         "/api/usda/foods/search",
         window.location.origin
@@ -11,7 +11,7 @@ export async function searchUsdaFoods(query) {
     url.searchParams.set("pageSize", '10');
    
 
-    const response = await fetch(url);
+    const response = await fetch(url, { signal });
     
     if (!response.ok) {
         throw new Error(`USDA API request failed: ${response.status}`)
@@ -26,6 +26,3 @@ export async function searchUsdaFoods(query) {
     return normalizedFoods;
 }
 
-// searchUsdaFoods("chicken breast")
-//     .then(foods => console.log("USDA results:", foods))
-//     .catch(error => console.error(error)); 
