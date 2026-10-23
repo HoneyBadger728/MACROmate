@@ -1,10 +1,12 @@
 import { useState } from "react";
 import PantryList from "../features/pantry/PantryList";
 import AddFoodModal from "../features/pantry/AddFoodModal";
+import FindFoodsModal from "../features/pantry/FindFoodsModal";
 import "./PantryPage.css"
 
 function PantryPage() {
     const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
+    const [isFindFoodsOpen, setIsFindFoodsOpen] = useState(false);
 
     return (
         <section className="pantry-page">  
@@ -15,7 +17,7 @@ function PantryPage() {
                     <button
                         className="pantry-page__action pantry-page__action--find"
                         type="button"
-                        disabled
+                        onClick={() => setIsFindFoodsOpen(true)}
                     >
                         Find Foods
                     </button>
@@ -32,6 +34,10 @@ function PantryPage() {
 
             {isAddFoodOpen && (
                 <AddFoodModal onClose={() => setIsAddFoodOpen(false)} />
+            )}
+
+            {isFindFoodsOpen && (
+                <FindFoodsModal onClose={() => setIsFindFoodsOpen(false)} />
             )}
 
             <PantryList />
