@@ -11,11 +11,20 @@ function MealEntryCard({ entry, food }) {
     const [quantityGrams, setQuantityGrams] = useState(entry.quantityGrams);
 
     const quantityInputRef = useRef(null)
+    const editButtonRef =useRef(null);
+    const shouldRestoreFocus = useRef(false);
 
     useEffect(() => {
         if (isEditing) {
             quantityInputRef.current?.focus();
             quantityInputRef.current?.select();
+        }
+    }, [isEditing])
+
+    useEffect(() => {
+        if (!isEditing && shouldRestoreFocus.current) {
+            editButtonRef.current?.focus();
+            shouldRestoreFocus.current = false;
         }
     }, [isEditing])
 
@@ -50,11 +59,13 @@ function MealEntryCard({ entry, food }) {
         );
 
         setQuantityGrams(normalizedQuantityGrams);
+        shouldRestoreFocus.current = true;
         setIsEditing(false);
     }
 
     function handleQuantityKeyDown(event) {
         if (event.key === "Enter" && isEditing) {
+            event.preventDefault();
             handleSave();
         }
     }
@@ -98,6 +109,8 @@ function MealEntryCard({ entry, food }) {
                         </button>
                     ) : (
                         <button
+                            ref={editButtonRef}
+                            enterKeyHint="go"
                             className="meal-card__action meal-card__action--edit"
                             type="button"
                             onClick={() => setIsEditing(true)}

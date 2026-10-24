@@ -94,7 +94,9 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
         setQuantityGrams(normalizeGrams(quantityGrams));
     }
 
-    function handleQuantityFocus() {
+    function handleQuantityFocus(event) {
+        event.currentTarget.select();
+
         if(!isExpanded) {
             onToggle();
         }
