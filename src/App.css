@@ -1,9 +1,14 @@
 
 
 .app-shell {
-    min-height: 100vh;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+
+    height: 100dvh;
+    overflow: hidden;
 }
 
 .app-content {
-    padding-bottom: 10rem;
+    min-height: 0;
+    overflow: hidden;
 }  

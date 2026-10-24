@@ -7,12 +7,14 @@ function Modal({title, titleId, descriptionId, onClose, initialFocusRef, childre
     useEffect(() => {
         const dialog = dialogRef.current;
         const previouslyFocused = document.activeElement;
+        const previousOverflow = document.body.style.overflow;
 
         if (!dialog) {
             return;
         }
 
         dialog.showModal();
+        document.body.style.overflow = 'hidden';
 
         initialFocusRef?.current?.focus()
 
@@ -27,6 +29,8 @@ function Modal({title, titleId, descriptionId, onClose, initialFocusRef, childre
 
         return () => {
             document.removeEventListener("keydown", handleKeyDown)
+
+            document.body.style.overflow = previousOverflow;
 
             if (dialog.open) {
                 dialog.close()

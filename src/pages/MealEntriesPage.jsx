@@ -7,7 +7,9 @@ function MealEntriesPage() {
         <section className="meals-page">
             <h2 className="meals-page__title">Today's Meals</h2>
 
-            <MealEntriesList />
+            <div className="meals-page__content">
+                <MealEntriesList />
+            </div>
         </section>
     );
 }

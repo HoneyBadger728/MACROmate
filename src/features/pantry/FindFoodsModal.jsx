@@ -92,6 +92,16 @@ function FindFoodsModal({ onClose }) {
                     </button> 
                 </div>
 
+                <div className="modal__actions">
+                    <button
+                        className="modal__action modal__action--secondary"
+                        type="button"
+                        onClick={handleClose}
+                    >
+                        Cancel
+                    </button>
+                </div>
+
                 {isLoading && (
                     <p role="status">
                         Searching USDA foods...
@@ -106,16 +116,18 @@ function FindFoodsModal({ onClose }) {
 
                 {!isLoading && results.length > 0 && (
                     <p role="status">
-                        Found {results.length} foods.
+                        Found {results.length} foods. Nutritional values per 100g.
                     </p>
                 )}
 
                 {!isLoading && results.length > 0 && (
                     <ul className="find-foods__results">
                         {results.map((food) => (
-                            <li key={food.id}>
-                                <p>{food.name}</p>
-                                <p>
+                            <li className="find-foods__result" key={food.id}>
+                                <p className="find-foods__result-name">
+                                    {food.name}
+                                </p>
+                                <p className="find-foods__result-macros">
                                     {food.caloriesPer100g} kcal /
                                     P: {food.proteinPer100g} /
                                     C: {food.carbsPer100g} /
@@ -132,15 +144,7 @@ function FindFoodsModal({ onClose }) {
                     </p>
                 )}
 
-                <div className="modal__actions">
-                    <button
-                        className="modal__action modal__action--secondary"
-                        type="button"
-                        onClick={handleClose}
-                    >
-                        Cancel
-                    </button>
-                </div>
+                
             </form>
         </Modal>
     );

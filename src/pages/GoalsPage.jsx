@@ -8,9 +8,11 @@ function GoalsPage() {
         <section className="home-page">  
             <h1 className="home-page__title">MACROmate</h1>
 
-            <GoalsForm />
-            <MacroProgress />
-            <UserActions />
+            <div className="home-page__content">
+                <GoalsForm />
+                <MacroProgress />
+                <UserActions />
+            </div>
         </section>
     );
 }

@@ -40,7 +40,10 @@ function PantryPage() {
                 <FindFoodsModal onClose={() => setIsFindFoodsOpen(false)} />
             )}
 
-            <PantryList />
+            <div className="pantry-page__content">
+                <PantryList />  
+            </div>
+            
         </section>
     );
 }

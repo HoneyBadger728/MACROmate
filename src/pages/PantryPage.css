@@ -1,6 +1,12 @@
 
 
 .pantry-page {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+
+    height: 100%;
+    min-height: 0;
+
     padding: 0.4rem 0.5rem 0rem;
 }
 
@@ -39,7 +45,7 @@
     white-space: noWrap;
 
     transition: 
-        color var(--trasition-fast),
+        color var(--transition-fast),
         background-color var(--trasition-fast),
         border-color var(--trasition-fast);
 }
@@ -62,6 +68,12 @@
     color: var(--color-text-muted);
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.pantry-page__content {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
 }
 
 

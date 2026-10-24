@@ -1,5 +1,17 @@
 
 
+.modal:has(.find-foods) {
+    overflow: hidden;
+}
+
+.find-foods {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 8rem);
+    min-height: 0;
+}
+
+
 .find-foods__label {
     display: block;
     margin-bottom: 0.25rem;
@@ -38,4 +50,14 @@
     box-shadow: 
         0 0 0 1px var(--color-primary),
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
+}
+
+.find-foods__results {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }

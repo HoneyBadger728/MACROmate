@@ -277,11 +277,18 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                             type="number"
                             min="0"
                             step="0.1"
+                            enterKeyHint="go"
                             value={quantityGrams}
                             disabled={isEditing}
                             onChange={handleQuantityChange}
                             onFocus={handleQuantityFocus} 
                             onBlur={handleQuantityBlur}
+                            onKeyDown={(event) => {
+                                if (event.key === "Enter") {
+                                    event.preventDefault();
+                                    event.currentTarget.blur();
+                                }
+                            }}
                         />
                         <span className="pantry-card__quantity-unit">{quantityUnit}</span>
                     </label>
