@@ -53,11 +53,136 @@
 }
 
 .find-foods__results {
+    display: grid;
+    gap: 0.375rem;
+    align-content: start;
+    
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior-y: contain;
 
     margin: 0;
-    padding: 0;
+    padding: 0.2rem;
     list-style: none;
+}
+
+.find-foods__result {
+    background-color: var(--color-surface-elevated);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    transition: border-color 0.15s ease;
+}
+
+.find-foods__result:has(.find-foods__result-toggle[aria-expanded="true"]) {
+    border-color: var(--color-primary);
+}
+
+.find-foods__result-toggle {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+
+    color: var(--color-text-primary);
+    background-color: transparent;
+    border: none;
+
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.find-foods__result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.find-foods__result-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+.find-foods__result-chevron {
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+}
+
+.find-foods__result-toggle[aria-expanded="true"]
+.find-foods__result-chevron {
+    color: var(--color-primary);
+}
+
+.find-foods__result-toggle:focus {
+    outline: none;
+}
+
+.find-foods__result:has(.find-foods__result-toggle:focus-visible) {
+    
+    box-shadow:
+        0 0 0 1px var(--color-primary),
+        0 0 7px 2px hsl(from var(--color-primary) h s l / 0.7);
+}
+
+.find-foods__result-macros {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.25rem;
+
+    margin-top: 0.5rem;
+}
+
+.find-foods__macro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+    min-width: 0;
+}
+
+.find-foods__macro-label {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 0.025rem;
+}
+
+.find-foods__macro-value {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.find-foods__macro-value small {
+    margin-left: 0.125rem;
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+}
+
+.find-foods__macro-value--calories {
+    color: var(--color-calories);
+}
+
+.find-foods__macro-value--protein {
+    color: var(--color-protein);
+}
+
+.find-foods__macro-value--carbs {
+    color: var(--color-carbs);
+}
+
+.find-foods__macro-value--fat {
+    color: var(--color-fat);
+}
+
+.find-foods__result-details {
+    margin: 0 0.5rem 0.5rem;
+    padding-top: 0.5rem;
+    
+    border-top: 1px solid var(--color-border);
+}
+
+.find-foods__result-details .modal__action {
+    width: 100%;
 }

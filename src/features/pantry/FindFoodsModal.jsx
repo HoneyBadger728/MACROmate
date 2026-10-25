@@ -9,8 +9,15 @@ function FindFoodsModal({ onClose }) {
     const [isLoading, setIsLoading] = useState(false);
     const [searchError, setSearchError] = useState("");
     const [hasSearched, setHasSearched] = useState(false);
+    const [expandedFoodId, setExpandedFoodId] = useState(null);
 
     const abortControllerRef = useRef(null);
+
+    function handleToggleFood(foodId) {
+        setExpandedFoodId(currentId =>
+            currentId === foodId ? null : foodId
+        );
+    }
 
     useEffect(() => {
         return () => {
@@ -33,6 +40,7 @@ function FindFoodsModal({ onClose }) {
         }
 
         setResults([]);
+        setExpandedFoodId(null);
         setSearchError("");
         setIsLoading(true);
         setHasSearched(false);
@@ -122,19 +130,69 @@ function FindFoodsModal({ onClose }) {
 
                 {!isLoading && results.length > 0 && (
                     <ul className="find-foods__results">
-                        {results.map((food) => (
-                            <li className="find-foods__result" key={food.id}>
-                                <p className="find-foods__result-name">
-                                    {food.name}
-                                </p>
-                                <p className="find-foods__result-macros">
-                                    {food.caloriesPer100g} kcal /
-                                    P: {food.proteinPer100g} /
-                                    C: {food.carbsPer100g} /
-                                    F: {food.fatPer100g}
-                                </p>
-                            </li>
-                        ))}
+                        {results.map((food) => {
+                            const isExpanded = expandedFoodId === food.id;
+                            
+                            return (
+                                <li className="find-foods__result" key={food.id}>
+                                    <button
+                                        className="find-foods__result-toggle"
+                                        type="button"
+                                        aria-expanded={isExpanded}
+                                        onClick={() => handleToggleFood(food.id)}
+                                    >
+                                        <span className="find-foods__result-header">
+                                            <span className="find-foods__result-name">
+                                                {food.name}
+                                            </span>
+
+                                            <span 
+                                            className="find-foods__result-chevron"
+                                            aria-hidden="true"
+                                            >
+                                                {isExpanded ? "▲" : "▼"}
+                                            </span>
+                                        </span>
+                                       
+                                    
+                                        
+                                        <span className="find-foods__result-macros">
+                                            {[
+                                                ["Calories", food.caloriesPer100g, "", "calories"],
+                                                ["Protein", food.proteinPer100g, "g", "protein"],
+                                                ["Carbs", food.carbsPer100g, "g", "carbs"],
+                                                ["Fat", food.fatPer100g, "g", "fat"]
+                                            ].map(([label, value, unit, type]) => (
+                                                <span
+                                                    className="find-foods__macro"
+                                                    key={type}
+                                                >
+                                                    <span className="find-foods__macro-label">
+                                                        {label}
+                                                    </span>
+
+                                                    <span className={`find-foods__macro-value find-foods__macro-value--${type}`}>
+                                                        {value}{unit && <small>{unit}</small>}
+                                                    </span>
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </button>
+
+                                    {isExpanded && (
+                                        <div className="find-foods__result-details">
+                                            <button
+                                                className="modal__action modal__action--primary"
+                                                type="button"
+                                                disabled
+                                            >
+                                                Add to Pantry
+                                            </button>
+                                        </div>
+                                    )}
+                                </li>
+                            )
+                        })}
                     </ul>
                 )}
 
