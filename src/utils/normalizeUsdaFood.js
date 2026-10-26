@@ -1,4 +1,4 @@
-
+import { normalizeToOneDecimal } from "./formatNumbers";
 
 function getNutrientValue(foodNutrients, nutrientId) {
     const nutrient = foodNutrients.find(
@@ -27,10 +27,11 @@ export function normalizeUsdaFood(food) {
     return {
         id: `usda-${food.fdcId}`,
         name: food.description,
-        proteinPer100g: protein,
-        carbsPer100g: carbs,
-        fatPer100g: fat,
-        caloriesPer100g: calories
+        caloriesPer100g: Math.round(calories),
+        proteinPer100g: normalizeToOneDecimal(protein),
+        carbsPer100g: normalizeToOneDecimal(carbs),
+        fatPer100g: normalizeToOneDecimal(fat)
+        
     };
 }
 
