@@ -7,6 +7,13 @@ import "./PantryPage.css"
 function PantryPage() {
     const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
     const [isFindFoodsOpen, setIsFindFoodsOpen] = useState(false);
+    const [newlyAddedItemId, setNewlyAddedItemId] = useState(null);
+
+    function handleFoodAdded(itemId) {
+        setNewlyAddedItemId(itemId);
+        setIsAddFoodOpen(false);
+        setIsFindFoodsOpen(false);
+    }
 
     return (
         <section className="pantry-page">  
@@ -33,7 +40,10 @@ function PantryPage() {
             </div>
 
             {isAddFoodOpen && (
-                <AddFoodModal onClose={() => setIsAddFoodOpen(false)} />
+                <AddFoodModal 
+                    onClose={() => setIsAddFoodOpen(false)} 
+                    onFoodAdded={handleFoodAdded}
+                />
             )}
 
             {isFindFoodsOpen && (
@@ -41,7 +51,7 @@ function PantryPage() {
             )}
 
             <div className="pantry-page__content">
-                <PantryList />  
+                <PantryList newlyAddedItemId={newlyAddedItemId} />  
             </div>
             
         </section>

@@ -21,7 +21,7 @@ function createPantryItem(formData) {
         };
 }
 
-function AddFoodModal({ onClose }) {
+function AddFoodModal({ onClose, onFoodAdded }) {
     const dispatch = useDispatch();
 
     const pantryItems = useSelector((state) => state.pantry);
@@ -71,7 +71,7 @@ function AddFoodModal({ onClose }) {
         const pantryItem = createPantryItem(newFood);
 
         dispatch(addPantryItem(pantryItem));
-        onClose();
+        onFoodAdded(pantryItem.id);
     }
     
     

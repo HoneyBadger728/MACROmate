@@ -10,7 +10,7 @@ import { normalizeFoodName } from "./pantryUtils";
 import { formatCalories, formatMacro, normalizeGrams, normalizeToOneDecimal } from "../../utils/formatNumbers";
 import "./PantryItemCard.css";
 
-function PantryItemCard({ item, isExpanded, onToggle }) {
+function PantryItemCard({ item, isExpanded, onToggle, focusOnAdd = false }) {
     
     const dispatch = useDispatch();
     const formErrorId = `edit-food-error-${item.id}`;
@@ -41,8 +41,10 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
 
     const caloriesInputRef = useRef(null);
     const editFoodButtonRef = useRef(null);
+    const toggleButtonRef = useRef(null);
     const shouldRestoreFocus = useRef(false);
-
+    const hasFocusOnAdd = useRef(false);
+    
     useEffect(() => {
         if (isEditing) {
             caloriesInputRef.current?.focus();
@@ -56,6 +58,13 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
             shouldRestoreFocus.current = false;
         }
     }, [isEditing])
+
+    useEffect(() => {
+        if (focusOnAdd && isExpanded && !hasFocusOnAdd.current) {
+            toggleButtonRef.current?.focus({ preventScroll: true });
+            hasFocusOnAdd.current = true;
+        }
+    }, [focusOnAdd, isExpanded]);
 
     const quantityMultiplier = (Number(quantityGrams) || 0) / 100;
     
@@ -260,6 +269,7 @@ function PantryItemCard({ item, isExpanded, onToggle }) {
                 
                 <div className="pantry-card__controls">
                     <button
+                        ref={toggleButtonRef}
                         className="pantry-card__toggle"
                         type="button"
                         onClick={handleToggleCard}

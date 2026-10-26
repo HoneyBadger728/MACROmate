@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { PackageOpen } from "lucide-react";
 import PantryItemCard from "./PantryItemCard";
 import "./PantryList.css"
 
-function PantryList() {
+function PantryList({ newlyAddedItemId }) {
     const pantryItems = useSelector((state) => state.pantry);
     const [expandedItemId, setExpandedItemId] = useState(null);
+
+    useEffect(() => {
+        if (newlyAddedItemId === null) return;
+
+        setExpandedItemId(newlyAddedItemId);
+    }, [newlyAddedItemId])
 
     function handleToggle(itemId) {
         setExpandedItemId((currentId) => currentId === itemId ? null : itemId); 
@@ -37,7 +43,8 @@ function PantryList() {
                         key={item.id} 
                         item={item}
                         isExpanded={expandedItemId === item.id}
-                        onToggle={() => handleToggle(item.id)} 
+                        onToggle={() => handleToggle(item.id)}
+                        focusOnAdd={newlyAddedItemId === item.id} 
                     />
                 ))
             )}
