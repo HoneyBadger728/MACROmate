@@ -47,7 +47,10 @@ function PantryPage() {
             )}
 
             {isFindFoodsOpen && (
-                <FindFoodsModal onClose={() => setIsFindFoodsOpen(false)} />
+                <FindFoodsModal 
+                    onClose={() => setIsFindFoodsOpen(false)} 
+                    onFoodAdded={handleFoodAdded}
+                />
             )}
 
             <div className="pantry-page__content">

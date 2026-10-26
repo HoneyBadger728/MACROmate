@@ -186,3 +186,23 @@
 .find-foods__result-details .modal__action {
     width: 100%;
 }
+
+.find-foods__results-length {
+     margin: 0.5rem;
+    
+
+    color: var(--color-text-primary);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    text-align: center;
+}
+
+.find-foods__error {
+    margin-bottom: 0.5rem;
+    
+
+    color: var(--color-danger);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    text-align: center;
+}

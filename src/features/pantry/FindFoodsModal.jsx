@@ -1,19 +1,30 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addPantryItem } from "./pantrySlice";
 import { searchUsdaFoods } from "../../utils/searchUsdaFoods";
+import { normalizeFoodName } from "./pantryUtils";
 import Modal from "../../components/Modal";
 import "./FindFoodsModal.css"
 
-function FindFoodsModal({ onClose }) {
+function FindFoodsModal({ onClose, onFoodAdded }) {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [searchError, setSearchError] = useState("");
     const [hasSearched, setHasSearched] = useState(false);
     const [expandedFoodId, setExpandedFoodId] = useState(null);
+    const [addError, setAddError] = useState("")
 
     const abortControllerRef = useRef(null);
 
+    const dispatch = useDispatch();
+
+    const pantryItems = useSelector((state) => state.pantry);
+
+
     function handleToggleFood(foodId) {
+        setAddError("")
+
         setExpandedFoodId(currentId =>
             currentId === foodId ? null : foodId
         );
@@ -42,6 +53,7 @@ function FindFoodsModal({ onClose }) {
         setResults([]);
         setExpandedFoodId(null);
         setSearchError("");
+        setAddError("");
         setIsLoading(true);
         setHasSearched(false);
 
@@ -62,6 +74,35 @@ function FindFoodsModal({ onClose }) {
         } finally {
             setIsLoading(false);
         }
+    }
+
+    function handleAddToPantry(food) {
+        const duplicateExists = pantryItems.some(
+            item => normalizeFoodName(item.name) === normalizeFoodName(food.name)
+        );
+
+        if (duplicateExists) {
+            setAddError("A pantry item with this name already exists.");
+            return;
+        }
+
+        setAddError("");
+
+        const id = typeof globalThis.crypto?.randomUUID === "function"
+            ? globalThis.crypto?.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+        const pantryItem = {
+            id,
+            name: food.name,
+            caloriesPer100g: food.caloriesPer100g,
+            proteinPer100g: food.proteinPer100g,
+            carbsPer100g: food.carbsPer100g,
+            fatPer100g: food.fatPer100g
+        };
+
+        dispatch(addPantryItem(pantryItem));
+        onFoodAdded(pantryItem.id);
     }
 
     return (
@@ -123,11 +164,12 @@ function FindFoodsModal({ onClose }) {
                 )}
 
                 {!isLoading && results.length > 0 && (
-                    <p role="status">
+                    <p className="find-foods__results-length" role="status">
                         Found {results.length} foods. Nutritional values per 100g.
                     </p>
                 )}
 
+               
                 {!isLoading && results.length > 0 && (
                     <ul className="find-foods__results">
                         {results.map((food) => {
@@ -181,10 +223,16 @@ function FindFoodsModal({ onClose }) {
 
                                     {isExpanded && (
                                         <div className="find-foods__result-details">
+                                             {addError && (
+                                                <p className="find-foods__error" role="alert">
+                                                    {addError}
+                                                </p>
+                                            )}
+
                                             <button
                                                 className="modal__action modal__action--primary"
                                                 type="button"
-                                                disabled
+                                                onClick={() => handleAddToPantry(food)}
                                             >
                                                 Add to Pantry
                                             </button>
