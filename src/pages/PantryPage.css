@@ -21,6 +21,10 @@
 }
 
 .pantry-page__title {
+    display: flex;
+    align-items: center;
+    gap: 0.275rem;
+    
     flex-shrink: 0;
     margin: 0;
 }
@@ -42,12 +46,12 @@
 
     font-size: var(--font-size-small);
     font-weight: 600;
-    white-space: noWrap;
+    white-space: nowrap;
 
     transition: 
         color var(--transition-fast),
-        background-color var(--trasition-fast),
-        border-color var(--trasition-fast);
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
 }
 
 .pantry-page__action:not(:disabled):hover {
@@ -79,7 +83,7 @@
 }
 
 
-@media (max-width: 340px) {
+@media (max-width: 360px) {
     .pantry-page__header {
         gap: 0.5rem;
         flex-direction: column;

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import MacroLogo from "./MacroLogo";
 import "./Navigation.css"
 
 function Navigation() {
@@ -13,9 +14,11 @@ function Navigation() {
             
             <NavLink 
                 className="bottom-nav__link bottom-nav__link--home" 
-                to="/" end
+                to="/" 
+                end
+                aria-label="MACROmate Home"
             >
-                MACROmate
+                <MacroLogo size={32} />
             </NavLink>
             
             <NavLink 

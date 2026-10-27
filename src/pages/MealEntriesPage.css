@@ -11,6 +11,10 @@
 }
 
 .meals-page__title {
+    display: flex;
+    align-items: center;
+    gap: 0.275rem;
+    
     margin-top: 0;
     margin-bottom: 0.75rem;
 }

@@ -9,7 +9,23 @@
 }
 
 .home-page__title {
+    display: flex;
+    align-items: center;
+    gap: 0;
+
     margin-bottom: 0.75rem;
+
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.home-page__logo {
+    flex-shrink: 0;
+}
+
+.home-page__brand-mate {
+    color: var(--color-primary);
 }
 
 .home-page__content {

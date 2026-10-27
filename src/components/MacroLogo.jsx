@@ -1,0 +1,45 @@
+
+
+function MacroLogo({ size = 40, className = "" }) {
+    return (
+        <svg
+            className={className}
+            width={size}
+            height={size}
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+        >
+            {/* Calories — green */}
+            <path
+                d="M5 15 Q5 8 12 8 Q15 8 18 11 L25 18 V85 Q25 92 18 92 H12 Q5 92 5 85 Z"
+                fill="#39D46A"
+            />
+            
+            <g transform="translate(0, -7)">
+                {/* Protein — red */}
+                <path
+                    d="M29 30 Q29 26 33 29 L46 40 V88 Q46 93 41 92 L34 86 Q29 82 29 77 Z"
+                    fill="#FF4D5A"
+                />
+
+                {/* Carbs — blue */}
+                <path
+                    d="M54 40 L67 29 Q71 26 71 30 V77 Q71 82 66 86 L59 92 Q54 93 54 88 Z"
+                    fill="#4D9AFF"
+                />
+            </g>
+           
+
+            {/* Fat — yellow */}
+            <path
+                d="M75 18 L82 11 Q85 8 88 8 Q95 8 95 15 V85 Q95 92 88 92 H82 Q75 92 75 85 Z"
+                fill="#FFC83D"
+            />
+        </svg>
+    );
+}
+
+export default MacroLogo;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import PantryList from "../features/pantry/PantryList";
 import AddFoodModal from "../features/pantry/AddFoodModal";
 import FindFoodsModal from "../features/pantry/FindFoodsModal";
+import MacroLogo from "../components/MacroLogo";
 import "./PantryPage.css"
 
 function PantryPage() {
@@ -18,7 +19,10 @@ function PantryPage() {
     return (
         <section className="pantry-page">  
             <div className="pantry-page__header">
-                <h2 className="pantry-page__title">My Pantry</h2>
+                <h2 className="pantry-page__title">
+                    <MacroLogo size={26} />
+                    <span>My Pantry</span>
+                </h2>
 
                 <div className="pantry-page__actions">
                     <button

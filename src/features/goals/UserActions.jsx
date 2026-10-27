@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 function UserActions() {
     const dispatch = useDispatch();
 
-    const [isClearMealIsOpen, setIsClearMealIsOpen] = useState(false);
+    const [isClearMealOpen, setIsClearMealOpen] = useState(false);
     const [isResetOpen, setIsResetOpen] = useState(false);
 
     const clearMealsCancelRef = useRef(null);
@@ -15,7 +15,7 @@ function UserActions() {
 
     function handleClearMeals() {
         dispatch(clearMealEntries());
-        setIsClearMealIsOpen(false);
+        setIsClearMealOpen(false);
     }
 
     function handleResetApp() {
@@ -33,7 +33,7 @@ function UserActions() {
                 <button
                     className="user-actions__button user-actions__button--clear"
                     type="button"
-                    onClick={() => setIsClearMealIsOpen(true)}
+                    onClick={() => setIsClearMealOpen(true)}
                 >
                     Clear Today's Meals
                 </button>
@@ -47,12 +47,12 @@ function UserActions() {
                 </button>
             </div>
 
-            {isClearMealIsOpen && (
+            {isClearMealOpen && (
                 <Modal
                     title="Clear Today's Meals?"
                     titleId="clear-meals-title"
                     descriptionId="clear-meals-description"
-                    onClose={() => setIsClearMealIsOpen(false)}
+                    onClose={() => setIsClearMealOpen(false)}
                     initialFocusRef={clearMealsCancelRef}
                 >
                     <p
@@ -76,7 +76,7 @@ function UserActions() {
                             className="modal__action modal__action--secondary"
                             type="button"
                             ref={clearMealsCancelRef}
-                            onClick={() => setIsClearMealIsOpen(false)}
+                            onClick={() => setIsClearMealOpen(false)}
                         >
                             Cancel
                         </button>
