@@ -108,82 +108,93 @@ function GoalsForm() {
             </div>
 
             <form 
-                className='goals__form' 
+                className={`goals__form ${inputsDisabled ? "goals__form--display" : ""}`}
                 id='goals__form'
                 onSubmit={handleSubmit}
             >
                 <div className='goals__fields'>
                     <label className='goals__field goals__field--calories'>
                         <span className='goals__label'>Calories</span>
-                        <input
-                            ref={caloriesInputRef}
-                            className='goals__input'
-                            type="number"
-                            name="calories"
-                            min="0"
-                            step="1"
-                            required
-                            placeholder='"2000"'
-                            value={formGoals.calories}
-                            disabled={inputsDisabled}
-                            onChange={handleChange}
-                        />
+                        <div className='goals__ring'>
+                           <input
+                                ref={caloriesInputRef}
+                                className='goals__input'
+                                type="number"
+                                name="calories"
+                                min="0"
+                                step="1"
+                                required
+                                placeholder='"2000"'
+                                value={formGoals.calories}
+                                disabled={inputsDisabled}
+                                onChange={handleChange}
+                            /> 
+                        </div>
+                        
                     </label>
 
                     <label className='goals__field goals__field--protein'>
                         <span className='goals__label'>Protein</span>
-                        <div className='goals__input-control'>
-                            <input
-                                className='goals__input'
-                                type="number"
-                                name="protein"
-                                min="0"
-                                step="1"
-                                required
-                                placeholder='"200"'
-                                value={formGoals.protein}
-                                disabled={inputsDisabled}
-                                onChange={handleChange}
-                            />
-                            <span className='goals__unit'>{macroUnit}</span>
-                        </div> 
+                        <div className='goals__ring'>
+                            <div className='goals__input-control'>
+                                <input
+                                    className='goals__input'
+                                    type="number"
+                                    name="protein"
+                                    min="0"
+                                    step="1"
+                                    required
+                                    placeholder='"200"'
+                                    value={formGoals.protein}
+                                    disabled={inputsDisabled}
+                                    onChange={handleChange}
+                                />
+                                <span className='goals__unit'>{macroUnit}</span>
+                            </div>  
+                        </div>
+                        
                     </label>
 
                     <label className='goals__field goals__field--carbs'>
                         <span className='goals__label'>Carbs</span>
-                        <div className='goals__input-control'>
-                            <input
-                                className='goals__input'
-                                type="number"
-                                name="carbs"
-                                min="0"
-                                step="1"
-                                required
-                                placeholder='"75"'
-                                value={formGoals.carbs}
-                                disabled={inputsDisabled}
-                                onChange={handleChange}
-                            />
-                            <span className='goals__unit'>{macroUnit}</span>
+                        <div className='goals__ring'>
+                            <div className='goals__input-control'>
+                                <input
+                                    className='goals__input'
+                                    type="number"
+                                    name="carbs"
+                                    min="0"
+                                    step="1"
+                                    required
+                                    placeholder='"75"'
+                                    value={formGoals.carbs}
+                                    disabled={inputsDisabled}
+                                    onChange={handleChange}
+                                />
+                                <span className='goals__unit'>{macroUnit}</span>
+                            </div>  
                         </div>
+                        
                     </label>
 
                     <label className='goals__field goals__field--fat'>
                         <span className='goals__label'>Fat</span>
-                        <div className='goals__input-control'>
-                            <input
-                                className='goals__input'
-                                type="number"
-                                name="fat"
-                                min="0"
-                                step="1"
-                                required
-                                placeholder='"40"'
-                                value={formGoals.fat}
-                                disabled={inputsDisabled}
-                                onChange={handleChange}
-                            />
-                            <span className='goals__unit'>{macroUnit}</span>
+                        <div className='goals__ring'>
+                            <div className='goals__input-control'>
+                                <input
+                                    className='goals__input'
+                                    type="number"
+                                    name="fat"
+                                    min="0"
+                                    step="1"
+                                    required
+                                    placeholder='"40"'
+                                    value={formGoals.fat}
+                                    disabled={inputsDisabled}
+                                    onChange={handleChange}
+                                />
+                                <span className='goals__unit'>{macroUnit}</span>
+                            </div>
                         </div>
                     </label>
                 </div>

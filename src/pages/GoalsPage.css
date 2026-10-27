@@ -8,12 +8,20 @@
     padding: 0.4rem 0.5rem 0;
 }
 
+.home-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
 .home-page__title {
     display: flex;
     align-items: center;
     gap: 0;
 
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
 
     font-size: 1.75rem;
     font-weight: 700;
@@ -28,10 +36,40 @@
     color: var(--color-primary);
 }
 
+.home-page__tagline {
+    display: none;
+    margin: 0;
+}
+
 .home-page__content {
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior-y: contain;
 
     padding-bottom: 1rem;
+}
+
+
+
+@media (min-width: 768px) {
+    .home-page__header {
+        margin-bottom: 1rem;
+    }
+    
+    .home-page__title {
+        font-size: 2.5rem;
+    }
+
+    .home-page__logo {
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+
+    .home-page__tagline {
+        display: block;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-larger);
+        font-weight: 500;
+        white-space: nowrap;
+    }
 }

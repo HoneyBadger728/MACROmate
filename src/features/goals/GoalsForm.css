@@ -186,3 +186,69 @@
     font-size: 0.875em; 
     font-weight: 500;
 }
+
+
+
+@media (min-width: 768px) {
+    .goals {
+        padding: 1.5rem;
+    }
+
+    .goals__header {
+        margin-bottom: 1.5rem;
+
+        font-size: var(--font-size-largest);
+    }
+
+    .goals__action {
+        font-size: var(--font-size-large);
+    }
+
+    .goals__fields {
+        gap: 1rem;
+    }
+
+    .goals__field {
+        font-size: var(--font-size-larger);
+    }
+
+    .goals__label {
+        font-size: var(--font-size-larger);
+        letter-spacing: 0.025rem;
+    }
+
+    .goals__form--display .goals__fields {
+        margin-bottom: 0;
+    }
+
+    .goals__form--display .goals__field {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+    }
+
+    .goals__form--display .goals__ring {
+        box-sizing: border-box;
+        width: 7.5rem;
+        aspect-ratio: 1;
+        border: 5px solid currentColor;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+    }
+
+    .goals__form--display .goals__field--calories .goals__ring {
+        color: var(--color-calories);
+    }
+
+    .goals__form--display .goals__field--protein .goals__ring {
+        color: var(--color-protein);
+    }
+
+    .goals__form--display .goals__field--carbs .goals__ring {
+        color: var(--color-carbs);
+    }
+
+    .goals__form--display .goals__field--fat .goals__ring {
+        color: var(--color-fat);
+    }
+}

@@ -61,3 +61,20 @@
     outline-offset: -2px;
 }
 
+
+
+@media (min-width: 768px) {
+    .bottom-nav {
+        min-height: 5.5rem;
+    }
+
+    .bottom-nav__link {
+        font-size: var(--font-size-larger);
+        padding: 1rem 0.75rem;
+    }
+
+    .bottom-nav__link--home svg {
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+}
