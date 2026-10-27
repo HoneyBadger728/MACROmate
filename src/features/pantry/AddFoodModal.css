@@ -43,6 +43,11 @@
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }
 
+.add-food__input::selection {
+    color: var(--color-surface-elevated);
+    background-color: var(--color-primary);
+}
+
 .add-food__input--error {
     border-color: var(--color-danger);
 }

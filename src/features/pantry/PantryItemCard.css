@@ -62,6 +62,11 @@
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }
 
+.pantry-card__name-input::selection {
+    color: var(--color-surface-elevated);
+    background-color: var(--color-primary);
+}
+
 .pantry-card__controls {
     display: flex;
     align-items: center;
