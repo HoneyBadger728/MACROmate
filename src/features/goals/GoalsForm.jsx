@@ -41,11 +41,11 @@ function GoalsForm() {
     }, [goals.isConfigured]);
 
     useEffect(() => {
-        if (!isEditing && shouldRestoreFocusRef.current) {
-            updateGoalsButtonRef.current?.focus();
+        if (goals.isConfigured && !isEditing && shouldRestoreFocusRef.current) {
+            updateGoalsButtonRef.current?.focus({preventScroll: true});
             shouldRestoreFocusRef.current = false;
         }
-    }, [isEditing])
+    }, [goals.isConfigured, isEditing])
     
    
     const inputsDisabled = goals.isConfigured && !isEditing;
@@ -71,7 +71,7 @@ function GoalsForm() {
 
         dispatch(updateGoals(normalizedGoals));
         setFormGoals(normalizedGoals)
-        shouldRestoreFocusRef.current = goals.isConfigured;
+        shouldRestoreFocusRef.current = true;
         setIsEditing(false);
     }
 

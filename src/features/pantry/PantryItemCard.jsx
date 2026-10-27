@@ -329,7 +329,15 @@ function PantryItemCard({ item, isExpanded, onToggle, focusOnAdd = false }) {
                                         {guidance.limitingFactors.length > 1 ? "s" : ""}:{" "}
                                     </span>
                                     <span className="pantry-card__limiting-value">
-                                        {guidance.limitingFactors.join(", ")}
+                                        {guidance.limitingFactors.map((factor, index) => (
+                                            <span
+                                                key={factor}
+                                                className={`pantry-card__limiting-factor pantry-card__limiting-factor--${factor.toLowerCase()}`}
+                                            >
+                                                {index > 0 && ", "}
+                                                {factor}
+                                            </span>
+                                        ))}
                                     </span>
                                 </p>
                             </>

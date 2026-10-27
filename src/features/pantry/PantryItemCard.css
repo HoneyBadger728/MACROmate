@@ -75,7 +75,6 @@
     margin-bottom: 0.75rem;
 }
 
-
 .pantry-card__toggle {
     flex-shrink: 0;
 
@@ -185,6 +184,22 @@
 .pantry-card__limiting-value {
     color: var(--color-text-primary);
     font-weight: 600;
+}
+
+.pantry-card__limiting-factor--calories {
+    color: var(--color-calories);
+}
+
+.pantry-card__limiting-factor--protein {
+    color: var(--color-protein);
+}
+
+.pantry-card__limiting-factor--carbs {
+    color: var(--color-carbs);
+}
+
+.pantry-card__limiting-factor--fat {
+    color: var(--color-fat);
 }
 
 .pantry-card__details {
