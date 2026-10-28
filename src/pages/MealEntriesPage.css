@@ -26,3 +26,23 @@
 
     padding-bottom: 1rem;
 }
+
+
+
+@media (min-width: 768px) {
+     .meals-page {
+        padding: 0.75rem 0.65rem 0rem;
+    }
+
+    .meals-page__title {
+        font-size: 2.5rem;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .meals-page__title svg {
+        width: 2.75rem;
+        height: 2.75rem;
+        flex-shrink: 0;
+    }
+}

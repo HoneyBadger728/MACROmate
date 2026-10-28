@@ -74,3 +74,25 @@
     background-color: hsl(from var(--color-danger) h s l / 0.25);
 }
 
+
+
+@media (min-width: 768px) {
+    .user-actions {
+        padding: 1.5rem;
+    }
+
+    .user-actions__title {
+        font-size: var(--font-size-largest);
+        margin-bottom: 1.5rem;
+    }
+
+    .user-actions__buttons {
+        gap: 0.75rem;
+    }
+
+    .user-actions__button {
+        min-height: 3rem;
+        padding: 0.75rem 1rem;
+        font-size: var(--font-size-large);
+    }
+}

@@ -23,6 +23,10 @@
     margin-bottom: 1rem;
 }
 
+.modal__description {
+    margin-bottom: 1rem;
+}
+
 .modal__actions {
     display: grid;
     gap: 0.5rem;
@@ -105,4 +109,33 @@
     box-shadow: 
         0 0 0 1px var(--color-primary),
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
+}
+
+
+
+@media (min-width: 768px) {
+    .modal {
+        padding: 1.5rem;
+    }
+
+    .modal__title {
+        font-size: var(--font-size-largest);
+        margin-bottom: 1.25rem;
+    }
+
+    .modal__description {
+        margin-bottom: 1.25rem;
+        font-size: var(--font-size-large);
+        line-height: 1.5;
+    }
+
+    .modal__actions {
+        gap: .75rem;
+    }
+
+    .modal__action {
+        min-height: 3rem;
+        padding: 0.75rem 1rem;
+        font-size: var(--font-size-large);
+    }
 }

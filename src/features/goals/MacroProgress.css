@@ -82,3 +82,48 @@
 .macro-progress__fill--fat {
     background-color: var(--color-fat);
 }
+
+
+
+@media (min-width: 768px) {
+    .macro-progress {
+        padding: 1.5rem;
+    }
+
+    .macro-progress__title {
+        font-size: var(--font-size-largest);
+        margin-bottom: 1.5rem;
+    }
+
+    .macro-progress__items {
+        gap: 1.5rem;
+    }
+
+    .macro-progress__header {
+        margin-bottom: 0.5rem;
+    }
+
+    .macro-progress__label {
+        font-size: var(--font-size-large);
+        letter-spacing: 0.025rem;
+    }
+
+    .macro-progress__status {
+        font-size: var(--font-size-body);
+        letter-spacing: 0.025rem;
+    }
+
+    .macro-progress__track {
+        height: 0.6rem;
+    }
+
+    .macro-progress__empty {
+        font-size: var(--font-size-large);
+    }
+
+    .macro-progress__empty-icon {
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 1rem;
+    }
+}

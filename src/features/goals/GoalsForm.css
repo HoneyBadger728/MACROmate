@@ -196,7 +196,9 @@
 
     .goals__header {
         margin-bottom: 1.5rem;
+    }
 
+    .goals__title {
         font-size: var(--font-size-largest);
     }
 
