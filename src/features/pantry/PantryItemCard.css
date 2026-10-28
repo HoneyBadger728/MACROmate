@@ -422,6 +422,16 @@
         line-height: 1.4;
     }
 
+    .pantry-card__name-label {
+        font-size: var(--font-size-body);
+    }
+
+    .pantry-card__name-input {
+        padding: 0.625rem 0.75rem;
+        font-size: var(--font-size-large);
+        line-height: 1.4;
+    }
+
     .pantry-card__controls {
         gap: 1rem;
         margin-bottom: 1rem;
@@ -471,6 +481,15 @@
         gap: 0.75rem;
     }
 
+    .pantry-card__nutrition-edit-title {
+        margin-bottom: 0.75rem;
+        font-size: var(--font-size-large);
+    }
+
+    .pantry-card__macro {
+        gap: 0.375rem;
+    }
+
     .pantry-card__macro-label {
         font-size: var(--font-size-large);
         letter-spacing: 0.025rem;
@@ -478,6 +497,10 @@
 
     .pantry-card__macro-input {
         font-size: var(--font-size-large);
+    }
+
+    .pantry-card__macro-input:not(:disabled) {
+        padding: 0.5rem 0.375rem;
     }
 
     .pantry-card__actions {
@@ -488,5 +511,9 @@
         min-height: 3rem;
         padding: 0.75rem 1rem;
         font-size: var(--font-size-large);
+    }
+
+    .pantry-card__action--save {
+        margin-top: 1rem;
     }
 }
