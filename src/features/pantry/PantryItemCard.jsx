@@ -42,13 +42,19 @@ function PantryItemCard({ item, isExpanded, onToggle, focusOnAdd = false }) {
     const caloriesInputRef = useRef(null);
     const editFoodButtonRef = useRef(null);
     const toggleButtonRef = useRef(null);
+    const saveChangesButtonRef = useRef(null);
     const shouldRestoreFocus = useRef(false);
     const hasFocusOnAdd = useRef(false);
     
     useEffect(() => {
         if (isEditing) {
-            caloriesInputRef.current?.focus();
+            caloriesInputRef.current?.focus({preventScroll: true});
             caloriesInputRef.current?.select();
+
+            saveChangesButtonRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+            });
         }
     }, [isEditing])
 
@@ -462,7 +468,8 @@ function PantryItemCard({ item, isExpanded, onToggle, focusOnAdd = false }) {
                             </label>
                         </div>
                         {isEditing ? (
-                            <button 
+                            <button
+                                ref={saveChangesButtonRef} 
                                 className="pantry-card__action pantry-card__action--save"
                                 type="submit"
                             >

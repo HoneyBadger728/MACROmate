@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPantryItem } from "./pantrySlice";
 import { searchUsdaFoods } from "../../utils/searchUsdaFoods";
@@ -16,6 +16,8 @@ function FindFoodsModal({ onClose, onFoodAdded }) {
     const [addError, setAddError] = useState("")
 
     const abortControllerRef = useRef(null);
+    const expandedCardRef = useRef(null);
+    const resultsRef = useRef(null);
 
     const dispatch = useDispatch();
 
@@ -35,6 +37,33 @@ function FindFoodsModal({ onClose, onFoodAdded }) {
             abortControllerRef.current?.abort();
         };
     }, []);
+
+    useLayoutEffect(() => {
+        if (expandedFoodId === null) return;
+        
+        const container = resultsRef.current;
+        const card = expandedCardRef.current;
+
+        if (!container || !card) return;
+
+        const containerRect = container.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        const topPadding = 8;
+        const bottomPadding = 8;
+
+        if (cardRect.top < containerRect.top + topPadding) {
+            container.scrollTop -=
+                containerRect.top + topPadding - cardRect.top;
+        } else if (
+            cardRect.height <= containerRect.height - topPadding - bottomPadding &&
+            cardRect.bottom > containerRect.bottom - bottomPadding
+        ) {
+            container.scrollTop +=
+                cardRect.bottom - containerRect.bottom + bottomPadding;
+        }
+
+    }, [expandedFoodId]);
 
     const handleClose = useCallback(() => {
         abortControllerRef.current?.abort();
@@ -171,12 +200,16 @@ function FindFoodsModal({ onClose, onFoodAdded }) {
 
                
                 {!isLoading && results.length > 0 && (
-                    <ul className="find-foods__results">
+                    <ul className="find-foods__results" ref={resultsRef}>
                         {results.map((food) => {
                             const isExpanded = expandedFoodId === food.id;
                             
                             return (
-                                <li className="find-foods__result" key={food.id}>
+                                <li 
+                                    className="find-foods__result" 
+                                    ref={isExpanded ? expandedCardRef : null}
+                                    key={food.id}
+                                >
                                     <button
                                         className="find-foods__result-toggle"
                                         type="button"

@@ -67,7 +67,7 @@
     overscroll-behavior-y: contain;
 
     margin: 0;
-    padding: 0.2rem;
+    padding: 0.2rem 0.2rem 1rem;
     list-style: none;
 }
 
@@ -125,7 +125,6 @@
 }
 
 .find-foods__result:has(.find-foods__result-toggle:focus-visible) {
-    
     box-shadow:
         0 0 0 1px var(--color-primary),
         0 0 7px 2px hsl(from var(--color-primary) h s l / 0.7);
@@ -193,9 +192,8 @@
 }
 
 .find-foods__results-length {
-     margin: 0.5rem;
+    margin: 0.5rem;
     
-
     color: var(--color-text-primary);
     font-size: var(--font-size-small);
     font-weight: 600;
@@ -205,7 +203,6 @@
 .find-foods__error {
     margin-bottom: 0.5rem;
     
-
     color: var(--color-danger);
     font-size: var(--font-size-small);
     font-weight: 600;
@@ -215,9 +212,27 @@
 .find-foods__empty {
     margin: 0.5rem;
     
-
     color: var(--color-text-primary);
     font-size: var(--font-size-small);
     font-weight: 600;
     text-align: center;
+}
+
+
+
+@media (min-width: 768px) {
+    .find-foods__label {
+        font-size: var(--font-size-large);
+        margin-bottom: 0.5rem;
+    }
+
+    .find-foods__search {
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .find-foods__input {
+        padding: 0.625rem 0.75rem;
+        font-size: var(--font-size-large);
+    }
 }

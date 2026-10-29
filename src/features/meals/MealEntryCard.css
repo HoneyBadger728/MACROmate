@@ -215,6 +215,7 @@
 }
 
 
+
 @media (max-width: 350px) {
     .meal-card__controls {
         gap: 0.375rem;
@@ -222,5 +223,60 @@
     
     .meal-card__quantity-input:not(:disabled) {
         width: 3.5rem;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .meal-card {
+        padding: 1.5rem;
+    }
+
+    .meal-card__name {
+        font-size: var(--font-size-larger);
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+
+    .meal-card__controls {
+        gap: 1rem;
+        margin-bottom: 1.25;
+    }
+
+    .meal-card__quantity {
+        font-size: var(--font-size-large);
+    }
+
+    .meal-card__quantity-input {
+        max-width: 6rem;
+        font-size: var(--font-size-large);
+    }
+
+    .meal-card__quantity-input:not(:disabled) {
+        padding: 0.5rem 0.625rem;
+    }
+
+    .meal-card__actions {
+        gap: 0.75rem;
+    }
+
+    .meal-card__action {
+        min-height: 2.75rem;
+        padding: 0.625rem 0.875rem;
+        font-size: var(--font-size-large);
+    }
+
+    .meal-card__macros {
+        gap: 0.75rem;
+    }
+
+    .meal-card__macro-label {
+        font-size: var(--font-size-large);
+        letter-spacing: 0.025rem;
+    }
+
+    .meal-card__macro-value {
+        font-size: var(--font-size-large);
     }
 }

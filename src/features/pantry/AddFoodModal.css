@@ -122,3 +122,40 @@
     color: var(--color-surface-elevated);
     background-color: var(--color-primary);
 }
+
+
+
+@media (min-width: 768px) {
+    .add-food__field {
+        margin-bottom: 1.5rem;
+    }
+
+    .add-food__label {
+        font-size: var(--font-size-large);
+    }
+
+    .add-food__macro-label {
+        font-size: var(--font-size-large);
+        letter-spacing: 0.025rem;
+    }
+
+    .add-food__input {
+        padding: 0.625rem 0.75rem;
+        font-size: var(--font-size-large);
+    }
+
+    .add-food__nutrition-title {
+        font-size: var(--font-size-large);
+        margin-bottom: 0.75rem;
+    }
+
+    .add-food__nutrition {
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .add-food__macro-input {
+        padding: 0.625rem 0.5rem;
+        font-size: var(--font-size-large);
+    }
+}
