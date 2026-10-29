@@ -104,12 +104,12 @@
     }
 
     .macro-progress__label {
-        font-size: var(--font-size-large);
+        font-size: var(--font-size-larger);
         letter-spacing: 0.025rem;
     }
 
     .macro-progress__status {
-        font-size: var(--font-size-body);
+        font-size: var(--font-size-large);
         letter-spacing: 0.025rem;
     }
 
