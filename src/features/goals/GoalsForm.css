@@ -261,7 +261,7 @@
             currentcolor 100%
         );
         border-radius: inherit;
-        animation: --gradient-rotation 15s linear infinite;
+        animation: gradient-rotation 15s linear infinite;
 
         mask: 
             radial-gradient(

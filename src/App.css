@@ -11,4 +11,14 @@
 .app-content {
     min-height: 0;
     overflow: hidden;
-}  
+}
+
+
+
+@media (min-width: 1024px) {
+    .app-shell {
+        width: 100%;
+        max-width: 72rem;
+        margin-inline: auto;
+    }
+}
