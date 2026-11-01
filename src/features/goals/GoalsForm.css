@@ -76,6 +76,11 @@
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }
 
+.goals__action--save:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 3px;
+}
+
 .goals__fields {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

@@ -4,7 +4,7 @@ import { deleteMealEntry, editMealEntryQuantity } from "./mealEntriesSlice";
 import { formatCalories, formatMacro, normalizeGrams } from "../../utils/formatNumbers";
 import "./MealEntryCard.css";
 
-function MealEntryCard({ entry, food }) {
+function MealEntryCard({ entry, food, onRemove, shouldFocus, onFocusRestored }) {
     const dispatch = useDispatch();
 
     const [isEditing, setIsEditing] = useState(false);
@@ -28,7 +28,14 @@ function MealEntryCard({ entry, food }) {
         }
     }, [isEditing])
 
-    const quantityMultiplier = (Number(quantityGrams) || 0) / 100;
+    useEffect(() => {
+        if (shouldFocus) {
+            editButtonRef.current?.focus();
+            onFocusRestored();
+        }
+    }, [shouldFocus, onFocusRestored])
+
+    const quantityMultiplier = Math.max(0, Number(quantityGrams) || 0) / 100;
     
     const calories = food.caloriesPer100g * quantityMultiplier;
     const protein = food.proteinPer100g * quantityMultiplier;
@@ -45,6 +52,10 @@ function MealEntryCard({ entry, food }) {
     }
 
     function handleSave() {
+        if (!quantityInputRef.current?.reportValidity()) {
+            return;
+        }
+        
         if (quantityGrams === "" || quantityGrams <= 0) {
             return;
         }
@@ -71,6 +82,7 @@ function MealEntryCard({ entry, food }) {
     }
 
     function handleDelete() {
+        onRemove(entry.id);
         dispatch(deleteMealEntry(entry.id));
     }
 
@@ -87,7 +99,7 @@ function MealEntryCard({ entry, food }) {
                         ref={quantityInputRef} 
                         className="meal-card__quantity-input"
                         type="number"
-                        min="0"
+                        min="0.1"
                         step="0.1"
                         value={quantityGrams}
                         disabled={!isEditing}
@@ -104,6 +116,7 @@ function MealEntryCard({ entry, food }) {
                             className="meal-card__action meal-card__action--save"
                             type="button"
                             onClick={handleSave}
+                            required
                         >
                             Save
                         </button>

@@ -111,6 +111,11 @@
         0 0 7px 1px hsl(from var(--color-primary) h s l / 0.7);
 }
 
+.modal__action--primary:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 3px;
+}
+
 
 
 @media (min-width: 768px) {
