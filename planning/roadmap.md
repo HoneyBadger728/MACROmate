@@ -59,10 +59,10 @@ External API integration fulfills a requirement of the Codecademy portfolio proj
 - [x] Core workflows and production behavior tested.
 - [x] Production deployment completed.
 - [x] README documentation completed.
-- [ ] Final documentation commit and production verification.
-- [ ] Create Git release tag `v1.0.0`.
+- [x] Final documentation commit and production verification.
+- [x] Create Git release tag `v1.0.0`.
 
-**Status:** MVP 1.0 implementation complete; final release preparation in progress.
+**Status:** MVP 1.0 - Released.
 
 ## 3. Post-MVP Enhancements 
 
